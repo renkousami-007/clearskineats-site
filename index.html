@@ -3,104 +3,716 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClearSkinEats | 战痘饮食指南</title>
+    <title>ClearSkinEats - 在战"痘"路上，吃出你的力量</title>
     <style>
-        /* 基础样式，确保网站看起来干净专业 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --mint: #7FBFB0;
+            --mint-light: #A8D5CA;
+            --mint-dark: #5A9A8C;
+            --mint-bg: #E8F4F1;
+            --cream: #F5F0E8;
+            --warm-white: #FDFCFA;
+            --text: #3D3D3D;
+            --text-light: #7A7A7A;
+            --text-muted: #A0A0A0;
+            --accent-warm: #D4A574;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--warm-white);
+            color: var(--text);
+            line-height: 1.9;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253,252,250,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(127,191,176,0.15);
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--mint-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--mint-dark); }
+        .nav-cta {
+            background: var(--mint);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .nav-cta:hover { background: var(--mint-dark); }
+        .hero {
+            padding: 140px 24px 100px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: var(--mint-bg);
+            color: var(--mint-dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        .hero h1 span {
+            color: var(--mint-dark);
+            position: relative;
+        }
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--mint-bg);
+            z-index: -1;
+            border-radius: 4px;
+        }
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        .btn-primary {
+            background: var(--mint);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 28px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--mint-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(127,191,176,0.3);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--mint-dark);
+            padding: 14px 32px;
+            border-radius: 28px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid var(--mint);
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: var(--mint);
+            color: white;
+        }
+        .hero-visual {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+            padding: 40px;
+            background: var(--mint-bg);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
         }
-        header {
-            text-align: center;
-            padding: 3rem 1rem;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 3rem;
+        .hero-visual-item { text-align: center; }
+        .hero-visual-item .emoji { font-size: 48px; margin-bottom: 8px; }
+        .hero-visual-item p { font-size: 14px; color: var(--text-light); font-weight: 500; }
+        .hero-visual-divider {
+            width: 1px;
+            height: 60px;
+            background: var(--mint-light);
         }
-        h1 {
-            color: #2c5530; /* 主色调：沉稳的绿色 */
-            font-size: 2.5rem;
+        .disclaimer {
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3D6 100%);
+            padding: 20px 24px;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-warm);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
         }
-        .tagline {
-            font-size: 1.2rem;
-            color: #666;
-            font-style: italic;
-        }
+        .disclaimer-icon { font-size: 22px; }
+        .disclaimer-text { font-size: 14px; color: #8B6914; }
+        .disclaimer-text strong { display: block; margin-bottom: 4px; font-size: 15px; }
         section {
+            padding: 80px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-tag {
+            display: inline-block;
+            background: var(--mint-bg);
+            color: var(--mint-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+        .section-desc { font-size: 17px; color: var(--text-light); max-width: 560px; margin: 0 auto; }
+        .manifesto-section { background: var(--cream); padding: 100px 24px; }
+        .manifesto-section section { max-width: 800px; margin: 0 auto; padding: 0; }
+        .manifesto-header { text-align: center; margin-bottom: 60px; }
+        .manifesto-header h2 { font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+        .manifesto-header p { font-size: 17px; color: var(--text-light); }
+        .manifesto-content {
             background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-radius: 24px;
+            padding: 60px 48px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
         }
-        footer {
+        .manifesto-chapter { margin-bottom: 48px; }
+        .manifesto-chapter:last-child { margin-bottom: 0; }
+        .manifesto-chapter h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--mint-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .manifesto-chapter h3 .num {
+            width: 32px;
+            height: 32px;
+            background: var(--mint-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--mint-dark);
+            flex-shrink: 0;
+        }
+        .manifesto-chapter p { font-size: 16px; color: var(--text); line-height: 2; margin-bottom: 12px; }
+        .manifesto-chapter p:last-child { margin-bottom: 0; }
+        .manifesto-chapter ul { margin-left: 44px; margin-top: 12px; }
+        .manifesto-chapter li { font-size: 16px; color: var(--text); line-height: 2; margin-bottom: 8px; }
+        .manifesto-chapter strong { color: var(--mint-dark); font-weight: 600; }
+        .manifesto-highlight {
+            background: var(--mint-bg);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+            border-left: 4px solid var(--mint);
+        }
+        .manifesto-highlight p { font-size: 16px; color: var(--text); line-height: 2; margin: 0; }
+        .manifesto-highlight strong { color: var(--mint-dark); }
+        .manifesto-closing {
             text-align: center;
-            padding: 2rem;
-            color: #888;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            margin-top: 3rem;
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid var(--mint-bg);
         }
-        a {
-            color: #2c5530;
-            text-decoration: none;
-            border-bottom: 1px dotted;
+        .manifesto-closing p { font-size: 18px; color: var(--mint-dark); font-weight: 600; line-height: 2; }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .feature-card {
+            background: white;
+            padding: 40px 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(127,191,176,0.12);
+            transition: all 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(127,191,176,0.1); }
+        .feature-icon {
+            width: 56px; height: 56px; background: var(--mint-bg); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;
+        }
+        .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+        .feature-desc { font-size: 15px; color: var(--text-light); line-height: 1.8; }
+        .recipes-section { background: linear-gradient(180deg, var(--warm-white) 0%, var(--mint-bg) 100%); padding: 80px 24px; }
+        .recipes-section section { max-width: 1100px; margin: 0 auto; padding: 0; }
+        .recipes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .recipe-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(127,191,176,0.12); transition: all 0.3s;
+        }
+        .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(127,191,176,0.12); }
+        .recipe-image {
+            width: 100%; height: 200px; background: linear-gradient(135deg, var(--mint-light) 0%, var(--mint) 100%);
+            display: flex; align-items: center; justify-content: center; font-size: 64px;
+        }
+        .recipe-content { padding: 28px; }
+        .recipe-tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .recipe-tag { background: var(--mint-bg); color: var(--mint-dark); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .recipe-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+        .recipe-desc { font-size: 14px; color: var(--text-light); margin-bottom: 16px; line-height: 1.7; }
+        .recipe-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid rgba(127,191,176,0.15); }
+        .recipe-difficulty { font-size: 13px; color: var(--text-muted); }
+        .recipe-cta { color: var(--mint-dark); font-weight: 600; font-size: 14px; text-decoration: none; }
+        .scenarios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .scenario-card {
+            background: white; border-radius: 20px; padding: 36px; display: flex; gap: 24px; align-items: flex-start;
+            border: 1px solid rgba(127,191,176,0.12); transition: all 0.3s;
+        }
+        .scenario-card:hover { box-shadow: 0 12px 36px rgba(127,191,176,0.08); }
+        .scenario-icon {
+            width: 56px; height: 56px; background: var(--mint-bg); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0;
+        }
+        .scenario-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+        .scenario-content p { font-size: 15px; color: var(--text-light); line-height: 1.8; }
+        .science-section { background: var(--mint-dark); color: white; padding: 80px 24px; }
+        .science-section .section-title, .science-section .section-desc { color: white; }
+        .science-section .section-desc { opacity: 0.8; }
+        .science-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .science-card {
+            background: rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 24px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;
+        }
+        .science-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+        .science-icon { font-size: 40px; margin-bottom: 16px; }
+        .science-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .science-desc { font-size: 13px; opacity: 0.7; line-height: 1.6; }
+        .cta-section { text-align: center; padding: 100px 24px; }
+        .cta-box {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%); border-radius: 32px;
+            padding: 80px 40px; color: white; max-width: 800px; margin: 0 auto;
+        }
+        .cta-box h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+        .cta-box p { font-size: 17px; opacity: 0.9; margin-bottom: 32px; }
+        .cta-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+        .cta-form input { flex: 1; padding: 16px 24px; border-radius: 28px; border: none; font-size: 16px; outline: none; }
+        .cta-form button {
+            background: var(--accent-warm); color: var(--text); padding: 16px 32px; border-radius: 28px;
+            border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;
+        }
+        .cta-form button:hover { background: #C49460; transform: translateY(-2px); }
+        .cta-note { font-size: 13px; opacity: 0.7; margin-top: 16px; }
+        footer { background: #2D3E3A; color: white; padding: 60px 24px 30px; }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        .footer-brand .logo { color: white; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .footer-brand p { font-size: 14px; opacity: 0.7; line-height: 1.8; }
+        .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; opacity: 0.5; }
+        @media (max-width: 968px) {
+            .hero { padding-top: 100px; }
+            .hero h1 { font-size: 32px; }
+            .hero-visual { flex-direction: column; gap: 20px; }
+            .hero-visual-divider { display: none; }
+            .features-grid, .recipes-grid { grid-template-columns: 1fr; }
+            .scenarios-grid { grid-template-columns: 1fr; }
+            .science-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+            .cta-form { flex-direction: column; }
+            .manifesto-content { padding: 40px 24px; }
+        }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 26px; }
+            .section-title { font-size: 26px; }
+            .science-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ClearSkinEats</h1>
-        <p class="tagline">在战“痘”路上，吃出你的力量</p>
-    </header>
-
-    <main>
-        <section id="declaration">
-            <h2>开站宣言</h2>
-            <p>我曾整个青春期都在与痤疮缠斗。直到后来，我才惊觉问题的核心之一，竟藏在我的饮食习惯里...</p>
-            <p>（ClearSkinEats —— 在战“痘”路上，吃出你的力量
-1. 我的故事：从误区中觉醒
-我的整个青春期都被痤疮困扰。我曾像许多人一样，尝试各种护肤品，并盲目忌口所有“发物”，但皮肤问题依旧反复，像一场无休止的战斗。
-直到后来，我才惊觉核心问题之一竟藏在我的饮食习惯里：我吃了太多的甜食，却严重缺乏真正滋养身体的肉类和主食，导致了“营养不良”下的皮肤炎症。
-2. 我的核心发现：平衡，而非剥夺
-这个发现颠覆了我的认知。我意识到，战痘远非简单的“做减法”和盲目忌口。它关乎更智慧的“平衡”：
-减少那些真正促发炎症的“空能量”（如精制糖、不健康脂肪）。
-补足构建健康皮肤必需的“营养基石”（优质蛋白、复合碳水、锌、Omega-3）。
-拥抱那些被忽略的盟友，如多样的菌菇和豆类。
-更重要的是，我是在坚持规范用药和科学清洁的基础上，通过饮食调整获得了事半功倍的效果。我坚信，皮肤健康需要医疗、护理与生活方式“三足鼎立”的支撑。
-3. 我们的矛盾与出路：美味不必是负担
-而我更深信，在“重口味”的享受与“皮肤友好”的健康之间，并非单选题。我们热爱的红烧肉、麻辣香锅，完全可以通过智慧的食材替换与烹饪改良，变得既满足口腹之欲，又不再成为皮肤的负担。
-4. 这就是 ClearSkinEats 的使命
-因此，我创建了这个空间。这里不提供医疗建议，也绝非教你“吃草”或“断食”。
-这里是一个 “基于证据的饮食策略实验室”​ 。我们将一起：
-解构：用科学的眼光，厘清食物与皮肤之间的复杂联系。
-改造：为我们钟爱的中式菜肴，寻找更优的解决方案。
-平衡：找到让身心都满足、愉悦的饮食之道。
-5. 最重要的原则：你是你自己健康的第一责任人
-我必须郑重声明：饮食是强大而温暖的辅助，但绝不能替代专业医疗。痤疮是疾病，诊治必须首先咨询皮肤科医生。​ 在遵循医嘱的前提下，科学的饮食将成为你最坚实的“后勤支持”。
-我走过的路，我愿意与你分享。让我们在遵循科学治疗的同时，学会用美食更好地滋养自己，吃出健康，也吃出快乐。
-欢迎你，让我们一起踏上这段更聪明、更美味的旅程。）</p>
-        </section>
-
-        <section id="next-steps">
-            <h2>接下来，这里会有：</h2>
-            <ul>
-                <li><strong>科学依据</strong>：关于饮食与皮肤健康的权威解读。</li>
-                <li><strong>核心方法</strong>：我的“四大支柱”饮食法详解。</li>
-                <li><strong>食谱库</strong>：针对中式重口菜的改良方案、快手抗痘餐。</li>
-                <li><strong>心态指南</strong>：如何摆脱对皮肤的过度焦虑。</li>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🌿</div>
+                ClearSkinEats
+            </a>
+            <ul class="nav-links">
+                <li><a href="#manifesto">开站宣言</a></li>
+                <li><a href="#recipes">改良食谱</a></li>
+                <li><a href="#scenarios">场景攻略</a></li>
+                <li><a href="#science">科学依据</a></li>
             </ul>
-            <p>网站正在紧锣密鼓地搭建中，感谢你的关注！</p>
+            <a href="#subscribe" class="nav-cta">订阅更新</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-tag">🌿 基于证据的饮食策略实验室</div>
+        <h1>在战"痘"路上，<br><span>吃出你的力量</span></h1>
+        <p class="hero-subtitle">不是教你"吃草"或"断食"，而是用科学方法改良你爱的中式味道，让美味与皮肤健康兼得。</p>
+        <div class="hero-buttons">
+            <a href="#manifesto" class="btn-primary">阅读开站宣言</a>
+            <a href="#recipes" class="btn-secondary">探索改良食谱</a>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-visual-item">
+                <div class="emoji">🥘</div>
+                <p>改良食谱</p>
+            </div>
+            <div class="hero-visual-divider"></div>
+            <div class="hero-visual-item">
+                <div class="emoji">📱</div>
+                <p>场景攻略</p>
+            </div>
+            <div class="hero-visual-divider"></div>
+            <div class="hero-visual-item">
+                <div class="emoji">🔬</div>
+                <p>循证内容</p>
+            </div>
+            <div class="hero-visual-divider"></div>
+            <div class="hero-visual-item">
+                <div class="emoji">⚕️</div>
+                <p>医疗优先</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="disclaimer">
+        <div class="disclaimer-icon">⚠️</div>
+        <div class="disclaimer-text">
+            <strong>重要声明</strong>
+            ClearSkinEats 提供的所有饮食建议仅作为痤疮管理的辅助手段，不能替代专业医疗诊断和治疗。如果你正在经历严重的痤疮问题，请务必优先咨询皮肤科医生，遵医嘱进行规范治疗。饮食调整是辅助，医疗才是根本。
+        </div>
+    </div>
+
+    <div class="manifesto-section" id="manifesto">
+        <section>
+            <div class="manifesto-header">
+                <div class="section-tag">开站宣言</div>
+                <h2>ClearSkinEats 的诞生</h2>
+                <p>一个关于觉醒、平衡与美味的故事</p>
+            </div>
+            <div class="manifesto-content">
+                <div class="manifesto-chapter">
+                    <h3><span class="num">1</span>我的故事：从误区中觉醒</h3>
+                    <p>我的整个青春期都被痤疮困扰。我曾像许多人一样，尝试各种护肤品，并盲目忌口所有"发物"，但皮肤问题依旧反复，像一场无休止的战斗。</p>
+                    <p>直到后来，我才惊觉核心问题之一竟藏在我的饮食习惯里：我吃了太多的甜食，却严重缺乏真正滋养身体的肉类和主食，导致了<strong>"营养不良"下的皮肤炎症</strong>。</p>
+                </div>
+                
+                <div class="manifesto-chapter">
+                    <h3><span class="num">2</span>我的核心发现：平衡，而非剥夺</h3>
+                    <p>这个发现颠覆了我的认知。我意识到，战痘远非简单的"做减法"和盲目忌口。它关乎更智慧的<strong>"平衡"</strong>：</p>
+                    <ul>
+                        <li>减少那些真正促发炎症的<strong>"空能量"</strong>（如精制糖、不健康脂肪）</li>
+                        <li>补足构建健康皮肤必需的<strong>"营养基石"</strong>（优质蛋白、复合碳水、锌、Omega-3）</li>
+                        <li>拥抱那些被忽略的盟友，如多样的<strong>菌菇和豆类</strong></li>
+                    </ul>
+                    <div class="manifesto-highlight">
+                        <p>更重要的是，我是在<strong>坚持规范用药和科学清洁</strong>的基础上，通过饮食调整获得了事半功倍的效果。我坚信，皮肤健康需要<strong>医疗、护理与生活方式"三足鼎立"</strong>的支撑。</p>
+                    </div>
+                </div>
+                
+                <div class="manifesto-chapter">
+                    <h3><span class="num">3</span>我们的矛盾与出路：美味不必是负担</h3>
+                    <p>而我更深信，在<strong>"重口味"的享受与"皮肤友好"的健康之间，并非单选题</strong>。我们热爱的红烧肉、麻辣香锅，完全可以通过智慧的食材替换与烹饪改良，变得既满足口腹之欲，又不再成为皮肤的负担。</p>
+                </div>
+                
+                <div class="manifesto-chapter">
+                    <h3><span class="num">4</span>这就是 ClearSkinEats 的使命</h3>
+                    <p>因此，我创建了这个空间。这里<strong>不提供医疗建议</strong>，也<strong>绝非教你"吃草"或"断食"</strong>。</p>
+                    <p>这里是一个<strong>"基于证据的饮食策略实验室"</strong>。我们将一起：</p>
+                    <ul>
+                        <li><strong>解构</strong>：用科学的眼光，厘清食物与皮肤之间的复杂联系</li>
+                        <li><strong>改造</strong>：为我们钟爱的中式菜肴，寻找更优的解决方案</li>
+                        <li><strong>平衡</strong>：找到让身心都满足、愉悦的饮食之道</li>
+                    </ul>
+                </div>
+                
+                <div class="manifesto-chapter">
+                    <h3><span class="num">5</span>最重要的原则：你是你自己健康的第一责任人</h3>
+                    <div class="manifesto-highlight">
+                        <p>我必须郑重声明：<strong>饮食是强大而温暖的辅助，但绝不能替代专业医疗。</strong>痤疮是疾病，诊治必须首先咨询皮肤科医生。在遵循医嘱的前提下，科学的饮食将成为你最坚实的"后勤支持"。</p>
+                    </div>
+                </div>
+                
+                <div class="manifesto-closing">
+                    <p>我走过的路，我愿意与你分享。<br>让我们在遵循科学治疗的同时，学会用美食更好地滋养自己，<br>吃出健康，也吃出快乐。</p>
+                    <p style="margin-top: 16px; font-size: 16px; color: var(--text-light); font-weight: 400;">欢迎你，让我们一起踏上这段更聪明、更美味的旅程。</p>
+                </div>
+            </div>
         </section>
-    </main>
+    </div>
+
+    <section id="features">
+        <div class="section-header">
+            <div class="section-tag">我们的特色</div>
+            <h2 class="section-title">为什么选 ClearSkinEats？</h2>
+            <p class="section-desc">不是让你吃草，而是让你爱吃的菜变得更健康</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌶️</div>
+                <h3 class="feature-title">中式重口改良</h3>
+                <p class="feature-desc">专注红烧肉、麻辣香锅、火锅等经典中餐的科学改良，保留风味的同时降低致痘风险，让你不用放弃家乡味。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">四大场景覆盖</h3>
+                <p class="feature-desc">外卖怎么点？食堂怎么吃？聚餐怎么选？自炊怎么做？针对真实生活场景，提供可落地的操作指南。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔬</div>
+                <h3 class="feature-title">循证医学内容</h3>
+                <p class="feature-desc">每篇内容都基于最新皮肤科和营养学研究，标注参考文献，拒绝伪科学和营销号谣言。</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="recipes-section" id="recipes">
+        <section>
+            <div class="section-header">
+                <div class="section-tag">招牌改良</div>
+                <h2 class="section-title">热门改良食谱</h2>
+                <p class="section-desc">从你最爱的菜开始，一步步改良</p>
+            </div>
+            <div class="recipes-grid">
+                <div class="recipe-card">
+                    <div class="recipe-image">🥘</div>
+                    <div class="recipe-content">
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">减油40%</span>
+                            <span class="recipe-tag">低GI</span>
+                        </div>
+                        <h3 class="recipe-title">清爽版红烧肉</h3>
+                        <p class="recipe-desc">用代糖替代冰糖，先煎后炖改为先蒸后炖，保留软糯口感的同时大幅降低糖油负荷。</p>
+                        <div class="recipe-meta">
+                            <div class="recipe-difficulty">⭐⭐ 中等难度</div>
+                            <a href="#" class="recipe-cta">查看做法 →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="recipe-image">🍲</div>
+                    <div class="recipe-content">
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">减盐35%</span>
+                            <span class="recipe-tag">抗炎</span>
+                        </div>
+                        <h3 class="recipe-title">低刺激麻辣香锅</h3>
+                        <p class="recipe-desc">用香料替代部分辣椒，增加姜黄和迷迭香等抗炎香料，减少辣椒素对皮肤的刺激。</p>
+                        <div class="recipe-meta">
+                            <div class="recipe-difficulty">⭐⭐⭐ 较高难度</div>
+                            <a href="#" class="recipe-cta">查看做法 →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="recipe-image">🍜</div>
+                    <div class="recipe-content">
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">低糖</span>
+                            <span class="recipe-tag">高纤维</span>
+                        </div>
+                        <h3 class="recipe-title">改良版奶茶</h3>
+                        <p class="recipe-desc">用燕麦奶+零卡糖+抹茶/乌龙茶底，自制一杯不升糖、不爆痘的"续命水"。</p>
+                        <div class="recipe-meta">
+                            <div class="recipe-difficulty">⭐ 简单</div>
+                            <a href="#" class="recipe-cta">查看做法 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="scenarios">
+        <div class="section-header">
+            <div class="section-tag">生活场景</div>
+            <h2 class="section-title">四大场景攻略</h2>
+            <p class="section-desc">不管你在哪吃，都有解决方案</p>
+        </div>
+        <div class="scenarios-grid">
+            <div class="scenario-card">
+                <div class="scenario-icon">🛵</div>
+                <div class="scenario-content">
+                    <h3>外卖攻略</h3>
+                    <p>美团/饿了么点单技巧：如何看配料表、选商家、备注改良。附赠"痘痘肌外卖白名单"餐厅推荐。</p>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-icon">🏫</div>
+                <div class="scenario-content">
+                    <h3>食堂攻略</h3>
+                    <p>高校/企业食堂选菜法则：窗口搭配技巧、避坑指南、一周健康食谱模板，让食堂也能吃出好皮肤。</p>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-icon">🎉</div>
+                <div class="scenario-content">
+                    <h3>聚餐攻略</h3>
+                    <p>火锅、烧烤、日料、西餐...不同聚餐场景的"最小伤害"吃法，社交和护肤两不误。</p>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="scenario-icon">👨‍🍳</div>
+                <div class="scenario-content">
+                    <h3>自炊攻略</h3>
+                    <p>厨房小白也能上手的改良菜谱，从买菜到出锅全流程指导，附赠一周备餐计划。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="science-section" id="science">
+        <section>
+            <div class="section-header">
+                <div class="section-tag" style="background: rgba(255,255,255,0.15); color: white;">科学依据</div>
+                <h2 class="section-title">饮食与痤疮的科学关系</h2>
+                <p class="section-desc">我们说的每一句话，都有研究支撑</p>
+            </div>
+            <div class="science-grid">
+                <div class="science-card">
+                    <div class="science-icon">🍬</div>
+                    <h4 class="science-title">高GI食物</h4>
+                    <p class="science-desc">高升糖指数食物会快速升高血糖，刺激胰岛素和IGF-1分泌，促进皮脂分泌和炎症反应。</p>
+                </div>
+                <div class="science-card">
+                    <div class="science-icon">🥛</div>
+                    <h4 class="science-title">乳制品</h4>
+                    <p class="science-desc">牛奶中的激素和生长因子可能刺激皮脂腺，尤其是脱脂奶与痤疮的关联已被多项研究证实。</p>
+                </div>
+                <div class="science-card">
+                    <div class="science-icon">🌶️</div>
+                    <h4 class="science-title">辛辣刺激</h4>
+                    <p class="science-desc">辣椒素虽不直接致痘，但可能通过促进炎症因子释放和血管扩张加重已有痘痘的红肿。</p>
+                </div>
+                <div class="science-card">
+                    <div class="science-icon">🥜</div>
+                    <h4 class="science-title">Omega-6脂肪酸</h4>
+                    <p class="science-desc">过量的Omega-6（如大豆油、玉米油）会促进炎症，而Omega-3（深海鱼、亚麻籽）则有抗炎作用。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="cta-section" id="subscribe">
+        <div class="cta-box">
+            <h2>加入 ClearSkinEats 社群</h2>
+            <p>每周获取新的改良食谱和护肤饮食资讯，和志同道合的小伙伴一起吃出好皮肤。</p>
+            <form class="cta-form" onsubmit="event.preventDefault(); alert('感谢订阅！');">
+                <input type="email" placeholder="输入你的邮箱地址" required>
+                <button type="submit">免费订阅</button>
+            </form>
+            <p class="cta-note">🔒 我们尊重你的隐私，不会发送垃圾邮件</p>
+        </div>
+    </section>
 
     <footer>
-        <p>© 2025 ClearSkinEats. 本网站内容基于个人经验与科学文献，不能替代专业医疗建议。</p>
-        <p>联系方式：<a href="mailto:hello@clearskineats.com">hello@clearskineats.com</a></p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🌿</div>
+                    ClearSkinEats
+                </a>
+                <p>通过科学的饮食改良方案，帮助中国年轻人改善皮肤健康。饮食是辅助，医疗是根本。</p>
+            </div>
+            <div class="footer-col">
+                <h4>内容</h4>
+                <ul>
+                    <li><a href="#">改良食谱</a></li>
+                    <li><a href="#">场景攻略</a></li>
+                    <li><a href="#">科学知识</a></li>
+                    <li><a href="#">成功案例</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关于</h4>
+                <ul>
+                    <li><a href="#">我们的故事</a></li>
+                    <li><a href="#">医学顾问团队</a></li>
+                    <li><a href="#">内容标准</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>合作</h4>
+                <ul>
+                    <li><a href="#">企业食堂</a></li>
+                    <li><a href="#">高校合作</a></li>
+                    <li><a href="#">品牌联名</a></li>
+                    <li><a href="#">媒体采访</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 ClearSkinEats. All rights reserved.</span>
+            <span>本站内容仅供参考，不构成医疗建议</span>
+        </div>
     </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
 </body>
 </html>
