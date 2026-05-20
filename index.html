@@ -30,350 +30,788 @@
             width: 100%;
             background: rgba(253,252,250,0.95);
             backdrop-filter: blur(10px);
+   <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearSkinEats — 在战"痘"路上，吃出你的力量</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --mint-50: #F0F7F5;
+            --mint-100: #E0F0EC;
+            --mint-200: #C5E4DD;
+            --mint-300: #9DD1C6;
+            --mint-400: #7FBFB0;
+            --mint-500: #5A9A8C;
+            --mint-600: #4A8578;
+            --mint-700: #3D6B62;
+            --cream: #FAF7F2;
+            --warm-50: #FDF9F3;
+            --accent-warm: #D4A574;
+            --text-primary: #2C3E3A;
+            --text-secondary: #5A6B66;
+            --text-tertiary: #8A9A94;
+            --white: #FFFFFF;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--cream);
+            color: var(--text-primary);
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250,247,242,0.92);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(127,191,176,0.15);
+            border-bottom: 1px solid rgba(127,191,176,0.1);
         }
         .nav-container {
-            max-width: 1100px;
+            max-width: 1080px;
             margin: 0 auto;
             padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 64px;
+            height: 68px;
         }
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            color: var(--mint-dark);
+            color: var(--mint-600);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--mint);
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--mint-300), var(--mint-500));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
+            box-shadow: 0 2px 8px rgba(90,154,140,0.2);
         }
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 36px;
             list-style: none;
         }
         .nav-links a {
             text-decoration: none;
-            color: var(--text);
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 14px;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .nav-links a:hover { color: var(--mint-dark); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--mint-400);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--mint-600); }
+        .nav-links a:hover::after { width: 100%; }
         .nav-cta {
-            background: var(--mint);
+            background: linear-gradient(135deg, var(--mint-400), var(--mint-500));
             color: white;
             padding: 10px 24px;
             border-radius: 24px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(90,154,140,0.25);
         }
-        .nav-cta:hover { background: var(--mint-dark); }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(90,154,140,0.35);
+        }
         .hero {
-            padding: 140px 24px 100px;
-            max-width: 1100px;
+            padding: 150px 24px 100px;
+            max-width: 1080px;
             margin: 0 auto;
             text-align: center;
         }
         .hero-tag {
-            display: inline-block;
-            background: var(--mint-bg);
-            color: var(--mint-dark);
-            padding: 8px 20px;
-            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--mint-100);
+            color: var(--mint-600);
+            padding: 10px 22px;
+            border-radius: 24px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 24px;
-            letter-spacing: 1px;
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
         }
         .hero h1 {
-            font-size: 44px;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 20px;
-            color: var(--text);
+            font-size: 46px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
-        .hero h1 span {
-            color: var(--mint-dark);
+        .hero h1 .highlight {
+            color: var(--mint-600);
             position: relative;
+            display: inline-block;
         }
-        .hero h1 span::after {
+        .hero h1 .highlight::after {
             content: '';
             position: absolute;
-            bottom: 4px;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: var(--mint-bg);
-            z-index: -1;
+            bottom: 6px;
+            left: -4px;
+            right: -4px;
+            height: 14px;
+            background: var(--mint-200);
+            opacity: 0.5;
             border-radius: 4px;
+            z-index: -1;
         }
         .hero-subtitle {
             font-size: 18px;
-            color: var(--text-light);
-            margin-bottom: 40px;
-            max-width: 560px;
+            color: var(--text-secondary);
+            margin-bottom: 44px;
+            max-width: 520px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.8;
         }
         .hero-buttons {
             display: flex;
             gap: 16px;
             justify-content: center;
-            margin-bottom: 60px;
+            margin-bottom: 64px;
         }
         .btn-primary {
-            background: var(--mint);
+            background: linear-gradient(135deg, var(--mint-400), var(--mint-500));
             color: white;
-            padding: 14px 32px;
+            padding: 15px 36px;
             border-radius: 28px;
             text-decoration: none;
             font-weight: 600;
             font-size: 16px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 16px rgba(90,154,140,0.3);
         }
         .btn-primary:hover {
-            background: var(--mint-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(127,191,176,0.3);
+            box-shadow: 0 8px 24px rgba(90,154,140,0.4);
         }
         .btn-secondary {
             background: transparent;
-            color: var(--mint-dark);
-            padding: 14px 32px;
+            color: var(--mint-600);
+            padding: 15px 36px;
             border-radius: 28px;
             text-decoration: none;
             font-weight: 600;
             font-size: 16px;
-            border: 2px solid var(--mint);
-            transition: all 0.3s;
+            border: 2px solid var(--mint-300);
+            transition: all 0.3s ease;
         }
         .btn-secondary:hover {
-            background: var(--mint);
-            color: white;
+            background: var(--mint-50);
+            border-color: var(--mint-400);
         }
-        .hero-visual {
+        .hero-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px;
-            background: var(--mint-bg);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
         }
-        .hero-visual-item { text-align: center; }
-        .hero-visual-item .emoji { font-size: 48px; margin-bottom: 8px; }
-        .hero-visual-item p { font-size: 14px; color: var(--text-light); font-weight: 500; }
-        .hero-visual-divider {
-            width: 1px;
-            height: 60px;
-            background: var(--mint-light);
+        .hero-card {
+            background: var(--white);
+            padding: 28px 32px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 160px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(127,191,176,0.1);
+            transition: all 0.3s ease;
+        }
+        .hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(127,191,176,0.12);
+        }
+        .hero-card .emoji {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .hero-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .hero-card .sub {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 400;
+            margin-top: 2px;
         }
         .disclaimer {
-            background: linear-gradient(135deg, #FFF8E7 0%, #FFF3D6 100%);
-            padding: 20px 24px;
-            max-width: 1100px;
-            margin: 0 auto 60px;
-            border-radius: 16px;
+            max-width: 1080px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+        .disclaimer-inner {
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFF3E6 100%);
+            padding: 24px 32px;
+            border-radius: 20px;
             border-left: 4px solid var(--accent-warm);
             display: flex;
             align-items: flex-start;
-            gap: 16px;
+            gap: 18px;
         }
-        .disclaimer-icon { font-size: 22px; }
-        .disclaimer-text { font-size: 14px; color: #8B6914; }
-        .disclaimer-text strong { display: block; margin-bottom: 4px; font-size: 15px; }
+        .disclaimer-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .disclaimer-text {
+            font-size: 15px;
+            color: #7A5C3C;
+            line-height: 1.8;
+        }
+        .disclaimer-text strong {
+            color: #5C4428;
+            font-weight: 700;
+        }
         section {
-            padding: 80px 24px;
-            max-width: 1100px;
+            padding: 90px 24px;
+            max-width: 1080px;
             margin: 0 auto;
         }
-        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
         .section-tag {
             display: inline-block;
-            background: var(--mint-bg);
-            color: var(--mint-dark);
-            padding: 6px 16px;
-            border-radius: 20px;
+            background: var(--mint-100);
+            color: var(--mint-600);
+            padding: 8px 20px;
+            border-radius: 24px;
             font-size: 13px;
             font-weight: 600;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+        .section-title {
+            font-size: 34px;
+            font-weight: 800;
             margin-bottom: 16px;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
         }
-        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
-        .section-desc { font-size: 17px; color: var(--text-light); max-width: 560px; margin: 0 auto; }
-        .manifesto-section { background: var(--cream); padding: 100px 24px; }
-        .manifesto-section section { max-width: 800px; margin: 0 auto; padding: 0; }
-        .manifesto-header { text-align: center; margin-bottom: 60px; }
-        .manifesto-header h2 { font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
-        .manifesto-header p { font-size: 17px; color: var(--text-light); }
+        .section-desc {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .manifesto-section {
+            background: linear-gradient(180deg, var(--cream) 0%, var(--warm-50) 100%);
+            padding: 100px 24px;
+        }
+        .manifesto-section section {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0;
+        }
         .manifesto-content {
-            background: white;
-            border-radius: 24px;
-            padding: 60px 48px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            background: var(--white);
+            border-radius: 28px;
+            padding: 56px 52px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.04);
+            border: 1px solid rgba(127,191,176,0.08);
         }
-        .manifesto-chapter { margin-bottom: 48px; }
-        .manifesto-chapter:last-child { margin-bottom: 0; }
+        .manifesto-chapter {
+            margin-bottom: 44px;
+        }
+        .manifesto-chapter:last-of-type {
+            margin-bottom: 0;
+        }
         .manifesto-chapter h3 {
             font-size: 20px;
             font-weight: 700;
-            color: var(--mint-dark);
-            margin-bottom: 16px;
+            color: var(--mint-600);
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
+            letter-spacing: -0.2px;
         }
         .manifesto-chapter h3 .num {
-            width: 32px;
-            height: 32px;
-            background: var(--mint-bg);
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--mint-200), var(--mint-300));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            font-weight: 700;
-            color: var(--mint-dark);
+            font-weight: 800;
+            color: var(--white);
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(127,191,176,0.25);
         }
-        .manifesto-chapter p { font-size: 16px; color: var(--text); line-height: 2; margin-bottom: 12px; }
-        .manifesto-chapter p:last-child { margin-bottom: 0; }
-        .manifesto-chapter ul { margin-left: 44px; margin-top: 12px; }
-        .manifesto-chapter li { font-size: 16px; color: var(--text); line-height: 2; margin-bottom: 8px; }
-        .manifesto-chapter strong { color: var(--mint-dark); font-weight: 600; }
+        .manifesto-chapter p {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 2;
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+        .manifesto-chapter p:last-child {
+            margin-bottom: 0;
+        }
+        .manifesto-chapter ul {
+            margin: 16px 0 16px 50px;
+        }
+        .manifesto-chapter li {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 2;
+            margin-bottom: 8px;
+        }
+        .manifesto-chapter strong {
+            color: var(--mint-600);
+            font-weight: 700;
+        }
         .manifesto-highlight {
-            background: var(--mint-bg);
-            border-radius: 16px;
-            padding: 32px;
+            background: linear-gradient(135deg, var(--mint-50), var(--mint-100));
+            border-radius: 18px;
+            padding: 28px 32px;
             margin: 24px 0;
-            border-left: 4px solid var(--mint);
+            border-left: 4px solid var(--mint-400);
         }
-        .manifesto-highlight p { font-size: 16px; color: var(--text); line-height: 2; margin: 0; }
-        .manifesto-highlight strong { color: var(--mint-dark); }
+        .manifesto-highlight p {
+            font-size: 16px;
+            color: var(--text-primary);
+            line-height: 2;
+            margin: 0;
+            text-align: justify;
+        }
         .manifesto-closing {
             text-align: center;
-            margin-top: 48px;
-            padding-top: 48px;
-            border-top: 1px solid var(--mint-bg);
+            margin-top: 52px;
+            padding-top: 44px;
+            border-top: 1px solid var(--mint-100);
         }
-        .manifesto-closing p { font-size: 18px; color: var(--mint-dark); font-weight: 600; line-height: 2; }
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .manifesto-closing .quote {
+            font-size: 20px;
+            color: var(--mint-600);
+            font-weight: 700;
+            line-height: 2;
+            font-style: italic;
+        }
+        .manifesto-closing .sign {
+            font-size: 15px;
+            color: var(--text-tertiary);
+            margin-top: 20px;
+            font-weight: 400;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
         .feature-card {
-            background: white;
+            background: var(--white);
             padding: 40px 32px;
-            border-radius: 20px;
-            border: 1px solid rgba(127,191,176,0.12);
-            transition: all 0.3s;
+            border-radius: 24px;
+            border: 1px solid rgba(127,191,176,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(127,191,176,0.1); }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--mint-300), var(--mint-400));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(127,191,176,0.12);
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
         .feature-icon {
-            width: 56px; height: 56px; background: var(--mint-bg); border-radius: 16px;
-            display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--mint-100), var(--mint-200));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(127,191,176,0.15);
         }
-        .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
-        .feature-desc { font-size: 15px; color: var(--text-light); line-height: 1.8; }
-        .recipes-section { background: linear-gradient(180deg, var(--warm-white) 0%, var(--mint-bg) 100%); padding: 80px 24px; }
-        .recipes-section section { max-width: 1100px; margin: 0 auto; padding: 0; }
-        .recipes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .feature-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .feature-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .recipes-section {
+            background: linear-gradient(180deg, var(--cream) 0%, var(--mint-50) 100%);
+            padding: 90px 24px;
+        }
+        .recipes-section section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
         .recipe-card {
-            background: white; border-radius: 20px; overflow: hidden;
-            border: 1px solid rgba(127,191,176,0.12); transition: all 0.3s;
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(127,191,176,0.1);
+            transition: all 0.4s ease;
         }
-        .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(127,191,176,0.12); }
+        .recipe-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(127,191,176,0.14);
+        }
         .recipe-image {
-            width: 100%; height: 200px; background: linear-gradient(135deg, var(--mint-light) 0%, var(--mint) 100%);
-            display: flex; align-items: center; justify-content: center; font-size: 64px;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--mint-200) 0%, var(--mint-400) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            position: relative;
+        }
+        .recipe-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, rgba(255,255,255,0.3), transparent);
         }
         .recipe-content { padding: 28px; }
-        .recipe-tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-        .recipe-tag { background: var(--mint-bg); color: var(--mint-dark); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-        .recipe-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-        .recipe-desc { font-size: 14px; color: var(--text-light); margin-bottom: 16px; line-height: 1.7; }
-        .recipe-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid rgba(127,191,176,0.15); }
-        .recipe-difficulty { font-size: 13px; color: var(--text-muted); }
-        .recipe-cta { color: var(--mint-dark); font-weight: 600; font-size: 14px; text-decoration: none; }
-        .scenarios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .recipe-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .recipe-tag {
+            background: var(--mint-50);
+            color: var(--mint-600);
+            padding: 5px 14px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .recipe-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .recipe-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--mint-100);
+        }
+        .recipe-difficulty {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+        .recipe-cta {
+            color: var(--mint-600);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .recipe-cta:hover {
+            color: var(--mint-700);
+        }
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
         .scenario-card {
-            background: white; border-radius: 20px; padding: 36px; display: flex; gap: 24px; align-items: flex-start;
-            border: 1px solid rgba(127,191,176,0.12); transition: all 0.3s;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 36px;
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+            border: 1px solid rgba(127,191,176,0.1);
+            transition: all 0.4s ease;
         }
-        .scenario-card:hover { box-shadow: 0 12px 36px rgba(127,191,176,0.08); }
+        .scenario-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(127,191,176,0.1);
+        }
         .scenario-icon {
-            width: 56px; height: 56px; background: var(--mint-bg); border-radius: 16px;
-            display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--mint-100), var(--mint-200));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(127,191,176,0.12);
         }
-        .scenario-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-        .scenario-content p { font-size: 15px; color: var(--text-light); line-height: 1.8; }
-        .science-section { background: var(--mint-dark); color: white; padding: 80px 24px; }
-        .science-section .section-title, .science-section .section-desc { color: white; }
-        .science-section .section-desc { opacity: 0.8; }
-        .science-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .scenario-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .scenario-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .science-section {
+            background: linear-gradient(135deg, var(--mint-600) 0%, var(--mint-700) 100%);
+            color: white;
+            padding: 90px 24px;
+        }
+        .science-section .section-title,
+        .science-section .section-desc { color: white; }
+        .science-section .section-desc { opacity: 0.85; }
+        .science-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
         .science-card {
-            background: rgba(255,255,255,0.08); border-radius: 16px; padding: 32px 24px; text-align: center;
-            border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 36px 24px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: all 0.4s ease;
         }
-        .science-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
-        .science-icon { font-size: 40px; margin-bottom: 16px; }
-        .science-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-        .science-desc { font-size: 13px; opacity: 0.7; line-height: 1.6; }
-        .cta-section { text-align: center; padding: 100px 24px; }
+        .science-card:hover {
+            background: rgba(255,255,255,0.14);
+            transform: translateY(-6px);
+        }
+        .science-icon {
+            font-size: 42px;
+            margin-bottom: 18px;
+            display: block;
+        }
+        .science-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .science-desc {
+            font-size: 13px;
+            opacity: 0.75;
+            line-height: 1.7;
+        }
+        .cta-section {
+            text-align: center;
+            padding: 100px 24px;
+        }
         .cta-box {
-            background: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%); border-radius: 32px;
-            padding: 80px 40px; color: white; max-width: 800px; margin: 0 auto;
+            background: linear-gradient(135deg, var(--mint-400) 0%, var(--mint-600) 100%);
+            border-radius: 32px;
+            padding: 72px 48px;
+            color: white;
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
-        .cta-box h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
-        .cta-box p { font-size: 17px; opacity: 0.9; margin-bottom: 32px; }
-        .cta-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
-        .cta-form input { flex: 1; padding: 16px 24px; border-radius: 28px; border: none; font-size: 16px; outline: none; }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+        }
+        .cta-box h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .cta-box p {
+            font-size: 17px;
+            opacity: 0.9;
+            margin-bottom: 36px;
+            position: relative;
+            max-width: 440px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-form {
+            display: flex;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .cta-form input {
+            flex: 1;
+            padding: 16px 24px;
+            border-radius: 28px;
+            border: none;
+            font-size: 15px;
+            outline: none;
+            background: rgba(255,255,255,0.95);
+            color: var(--text-primary);
+        }
+        .cta-form input::placeholder {
+            color: var(--text-tertiary);
+        }
         .cta-form button {
-            background: var(--accent-warm); color: var(--text); padding: 16px 32px; border-radius: 28px;
-            border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;
+            background: var(--accent-warm);
+            color: var(--text-primary);
+            padding: 16px 32px;
+            border-radius: 28px;
+            border: none;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
-        .cta-form button:hover { background: #C49460; transform: translateY(-2px); }
-        .cta-note { font-size: 13px; opacity: 0.7; margin-top: 16px; }
-        footer { background: #2D3E3A; color: white; padding: 60px 24px 30px; }
-        .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-        .footer-brand .logo { color: white; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .footer-brand p { font-size: 14px; opacity: 0.7; line-height: 1.8; }
-        .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+        .cta-form button:hover {
+            background: #C49460;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .cta-note {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-top: 18px;
+            position: relative;
+        }
+        footer {
+            background: linear-gradient(180deg, #2D3E3A 0%, #243430 100%);
+            color: white;
+            padding: 64px 24px 32px;
+        }
+        .footer-content {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            opacity: 0.65;
+            line-height: 1.8;
+            max-width: 280px;
+        }
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.9;
+        }
         .footer-col ul { list-style: none; }
         .footer-col li { margin-bottom: 12px; }
-        .footer-col a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.3s; }
-        .footer-col a:hover { color: white; }
-        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; opacity: 0.5; }
+        .footer-col a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .footer-col a:hover {
+            color: white;
+        }
+        .footer-bottom {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            opacity: 0.45;
+        }
         @media (max-width: 968px) {
-            .hero { padding-top: 100px; }
+            .hero { padding-top: 110px; }
             .hero h1 { font-size: 32px; }
-            .hero-visual { flex-direction: column; gap: 20px; }
-            .hero-visual-divider { display: none; }
+            .hero-cards { flex-wrap: wrap; }
             .features-grid, .recipes-grid { grid-template-columns: 1fr; }
             .scenarios-grid { grid-template-columns: 1fr; }
             .science-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-content { grid-template-columns: 1fr 1fr; }
             .nav-links { display: none; }
             .cta-form { flex-direction: column; }
-            .manifesto-content { padding: 40px 24px; }
+            .manifesto-content { padding: 40px 28px; }
         }
         @media (max-width: 640px) {
             .hero h1 { font-size: 26px; }
@@ -381,6 +819,8 @@
             .science-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .hero-buttons a { width: 100%; max-width: 280px; text-align: center; }
         }
     </style>
 </head>
@@ -403,49 +843,52 @@
 
     <section class="hero">
         <div class="hero-tag">🌿 基于证据的饮食策略实验室</div>
-        <h1>在战"痘"路上，<br><span>吃出你的力量</span></h1>
+        <h1>在战"痘"路上，<br><span class="highlight">吃出你的力量</span></h1>
         <p class="hero-subtitle">不是教你"吃草"或"断食"，而是用科学方法改良你爱的中式味道，让美味与皮肤健康兼得。</p>
         <div class="hero-buttons">
             <a href="#manifesto" class="btn-primary">阅读开站宣言</a>
             <a href="#recipes" class="btn-secondary">探索改良食谱</a>
         </div>
-        <div class="hero-visual">
-            <div class="hero-visual-item">
-                <div class="emoji">🥘</div>
+        <div class="hero-cards">
+            <div class="hero-card">
+                <span class="emoji">🥘</span>
                 <p>改良食谱</p>
+                <p class="sub">红烧肉也能清爽吃</p>
             </div>
-            <div class="hero-visual-divider"></div>
-            <div class="hero-visual-item">
-                <div class="emoji">📱</div>
+            <div class="hero-card">
+                <span class="emoji">📱</span>
                 <p>场景攻略</p>
+                <p class="sub">外卖食堂全搞定</p>
             </div>
-            <div class="hero-visual-divider"></div>
-            <div class="hero-visual-item">
-                <div class="emoji">🔬</div>
+            <div class="hero-card">
+                <span class="emoji">🔬</span>
                 <p>循证内容</p>
+                <p class="sub">每句话都有依据</p>
             </div>
-            <div class="hero-visual-divider"></div>
-            <div class="hero-visual-item">
-                <div class="emoji">⚕️</div>
+            <div class="hero-card">
+                <span class="emoji">⚕️</span>
                 <p>医疗优先</p>
+                <p class="sub">饮食只是辅助</p>
             </div>
         </div>
     </section>
 
     <div class="disclaimer">
-        <div class="disclaimer-icon">⚠️</div>
-        <div class="disclaimer-text">
-            <strong>重要声明</strong>
-            ClearSkinEats 提供的所有饮食建议仅作为痤疮管理的辅助手段，不能替代专业医疗诊断和治疗。如果你正在经历严重的痤疮问题，请务必优先咨询皮肤科医生，遵医嘱进行规范治疗。饮食调整是辅助，医疗才是根本。
+        <div class="disclaimer-inner">
+            <div class="disclaimer-icon">💛</div>
+            <div class="disclaimer-text">
+                <strong>先说一句重要的话</strong><br>
+                ClearSkinEats 提供的所有饮食建议仅作为痤疮管理的<strong>辅助手段</strong>，不能替代专业医疗诊断和治疗。如果你正在经历严重的痤疮问题，请务必优先咨询皮肤科医生，遵医嘱进行规范治疗。饮食调整是辅助，医疗才是根本 —— 我们在这里，是为你提供温暖的"后勤支持"。
+            </div>
         </div>
     </div>
 
     <div class="manifesto-section" id="manifesto">
         <section>
-            <div class="manifesto-header">
+            <div class="section-header">
                 <div class="section-tag">开站宣言</div>
-                <h2>ClearSkinEats 的诞生</h2>
-                <p>一个关于觉醒、平衡与美味的故事</p>
+                <h2 class="section-title">ClearSkinEats 的诞生</h2>
+                <p class="section-desc">一个关于觉醒、平衡与美味的故事</p>
             </div>
             <div class="manifesto-content">
                 <div class="manifesto-chapter">
@@ -491,8 +934,8 @@
                 </div>
                 
                 <div class="manifesto-closing">
-                    <p>我走过的路，我愿意与你分享。<br>让我们在遵循科学治疗的同时，学会用美食更好地滋养自己，<br>吃出健康，也吃出快乐。</p>
-                    <p style="margin-top: 16px; font-size: 16px; color: var(--text-light); font-weight: 400;">欢迎你，让我们一起踏上这段更聪明、更美味的旅程。</p>
+                    <p class="quote">"我走过的路，我愿意与你分享。<br>让我们在遵循科学治疗的同时，学会用美食更好地滋养自己，<br>吃出健康，也吃出快乐。"</p>
+                    <p class="sign">欢迎你，让我们一起踏上这段更聪明、更美味的旅程 🌿</p>
                 </div>
             </div>
         </section>
@@ -627,22 +1070,22 @@
             </div>
             <div class="science-grid">
                 <div class="science-card">
-                    <div class="science-icon">🍬</div>
+                    <span class="science-icon">🍬</span>
                     <h4 class="science-title">高GI食物</h4>
                     <p class="science-desc">高升糖指数食物会快速升高血糖，刺激胰岛素和IGF-1分泌，促进皮脂分泌和炎症反应。</p>
                 </div>
                 <div class="science-card">
-                    <div class="science-icon">🥛</div>
+                    <span class="science-icon">🥛</span>
                     <h4 class="science-title">乳制品</h4>
                     <p class="science-desc">牛奶中的激素和生长因子可能刺激皮脂腺，尤其是脱脂奶与痤疮的关联已被多项研究证实。</p>
                 </div>
                 <div class="science-card">
-                    <div class="science-icon">🌶️</div>
+                    <span class="science-icon">🌶️</span>
                     <h4 class="science-title">辛辣刺激</h4>
                     <p class="science-desc">辣椒素虽不直接致痘，但可能通过促进炎症因子释放和血管扩张加重已有痘痘的红肿。</p>
                 </div>
                 <div class="science-card">
-                    <div class="science-icon">🥜</div>
+                    <span class="science-icon">🥜</span>
                     <h4 class="science-title">Omega-6脂肪酸</h4>
                     <p class="science-desc">过量的Omega-6（如大豆油、玉米油）会促进炎症，而Omega-3（深海鱼、亚麻籽）则有抗炎作用。</p>
                 </div>
@@ -654,7 +1097,7 @@
         <div class="cta-box">
             <h2>加入 ClearSkinEats 社群</h2>
             <p>每周获取新的改良食谱和护肤饮食资讯，和志同道合的小伙伴一起吃出好皮肤。</p>
-            <form class="cta-form" onsubmit="event.preventDefault(); alert('感谢订阅！');">
+            <form class="cta-form" onsubmit="event.preventDefault(); alert('感谢订阅！我们会尽快与你联系。');">
                 <input type="email" placeholder="输入你的邮箱地址" required>
                 <button type="submit">免费订阅</button>
             </form>
