@@ -1,426 +1,691 @@
 <!DOCTYPE html>
 <html lang="zh-CN" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClearSkinEats — 在战"痘"路上，吃出你的力量</title>
-    <meta name="description" content="基于证据的饮食策略实验室。不是教你吃草，而是用科学方法改良你爱的中式味道，让美味与皮肤健康兼得。">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'Noto Sans SC', 'system-ui', 'sans-serif'],
-                    },
-                    colors: {
-                        mint: {
-                            50: '#F0F7F5', 100: '#E0F0EC', 150: '#D5E8E3', 200: '#C5E4DD',
-                            300: '#9DD1C6', 400: '#7FBFB0', 500: '#5A9A8C', 600: '#4A8578',
-                            700: '#3D6B62', 800: '#2D3E3A', 900: '#243430',
-                        },
-                        cream: '#FAF7F2',
-                        warm: { 50: '#FDF9F3', 100: '#FFF8F0', 200: '#FFF3E6' },
-                        accent: { warm: '#D4A574', dark: '#C49460' },
-                        skin: {
-                            text: '#2C3E3A', secondary: '#5A6B66', tertiary: '#8A9A94',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif; }
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-        .recipe-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .recipe-card:hover { transform: translateY(-8px); }
-        .tag-glow { transition: all 0.3s ease; }
-        .tag-glow:hover { box-shadow: 0 0 16px rgba(90,154,140,0.25); transform: scale(1.05); }
-        .grain-bg {
-            background-color: #FAF7F2;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-        }
-        .hero-highlight { position: relative; display: inline-block; }
-        .hero-highlight::after {
-            content: ''; position: absolute; bottom: 6px; left: -4px; right: -4px;
-            height: 14px; background: #C5E4DD; opacity: 0.5; border-radius: 4px; z-index: -1;
-        }
-        .manifesto-num {
-            width: 36px; height: 36px; background: linear-gradient(135deg, #C5E4DD, #9DD1C6);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 14px; font-weight: 800; color: white; flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(127,191,176,0.25);
-        }
-        .scenario-card { transition: all 0.4s ease; }
-        .scenario-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(127,191,176,0.12); }
-        .science-card { transition: all 0.4s ease; }
-        .science-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-6px); }
-        .filter-btn.active { background: linear-gradient(135deg, #5A9A8C, #4A8578) !important; color: white !important; border-color: transparent !important; box-shadow: 0 4px 16px rgba(90,154,140,0.3); }
-        .mobile-menu { transition: all 0.3s ease; }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ClearSkinEats — 在战"痘"路上，吃出你的力量</title>
+   <meta name="description" content="基于证据的饮食策略实验室。不是教你吃草，而是用科学方法改良你爱的中式味道，让美味与皮肤健康兼得。">
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   fontFamily: {
+                       sans: ['Inter', 'Noto Sans SC', 'system-ui', 'sans-serif'],
+                   },
+                   colors: {
+                       mint: {
+                           50: '#F0F7F5', 100: '#E0F0EC', 150: '#D5E8E3', 200: '#C5E4DD',
+                           300: '#9DD1C6', 400: '#7FBFB0', 500: '#5A9A8C', 600: '#4A8578',
+                           700: '#3D6B62', 800: '#2D3E3A', 900: '#243430',
+                       },
+                       cream: '#FAF7F2',
+                       warm: { 50: '#FDF9F3', 100: '#FFF8F0', 200: '#FFF3E6' },
+                       accent: { warm: '#D4A574', dark: '#C49460' },
+                       skin: {
+                           text: '#2C3E3A', secondary: '#5A6B66', tertiary: '#8A9A94',
+                       }
+                   }
+               }
+           }
+       }
+   </script>
+   <style>
+       body { font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif; }
+       .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+       @keyframes fadeIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+       .recipe-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+       .recipe-card:hover { transform: translateY(-8px); }
+       .tag-glow { transition: all 0.3s ease; }
+       .tag-glow:hover { box-shadow: 0 0 16px rgba(90,154,140,0.25); transform: scale(1.05); }
+       .grain-bg {
+           background-color: #FAF7F2;
+           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+       }
+       .hero-highlight { position: relative; display: inline-block; }
+       .hero-highlight::after {
+           content: ''; position: absolute; bottom: 6px; left: -4px; right: -4px;
+           height: 14px; background: #C5E4DD; opacity: 0.5; border-radius: 4px; z-index: -1;
+       }
+       .manifesto-num {
+           width: 36px; height: 36px; background: linear-gradient(135deg, #C5E4DD, #9DD1C6);
+           border-radius: 50%; display: flex; align-items: center; justify-content: center;
+           font-size: 14px; font-weight: 800; color: white; flex-shrink: 0;
+           box-shadow: 0 2px 8px rgba(127,191,176,0.25);
+       }
+       .scenario-card { transition: all 0.4s ease; }
+       .scenario-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(127,191,176,0.12); }
+       .science-card { transition: all 0.4s ease; }
+       .science-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-6px); }
+       .filter-btn.active { background: linear-gradient(135deg, #5A9A8C, #4A8578) !important; color: white !important; border-color: transparent !important; box-shadow: 0 4px 16px rgba(90,154,140,0.3); }
+       .mobile-menu { transition: all 0.3s ease; }
+   </style>
 </head>
 <body class="grain-bg text-skin-text antialiased">
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-cream/90 backdrop-blur-xl border-b border-mint-200/30 z-50">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2.5 text-xl font-bold text-mint-600 no-underline">
-                <div class="w-9 h-9 bg-gradient-to-br from-mint-300 to-mint-500 rounded-full flex items-center justify-center text-base shadow-md shadow-mint-300/30">🌿</div>
-                ClearSkinEats
-            </a>
-            <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-skin-secondary">
-                <li><a href="#manifesto" class="hover:text-mint-600 transition-colors relative group">开站宣言<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
-                <li><a href="#recipes" class="hover:text-mint-600 transition-colors relative group">改良食谱<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
-                <li><a href="#scenarios" class="hover:text-mint-600 transition-colors relative group">场景攻略<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
-                <li><a href="#science" class="hover:text-mint-600 transition-colors relative group">科学依据<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
-            </ul>
-            <a href="#subscribe" class="hidden md:inline-flex bg-gradient-to-r from-mint-400 to-mint-500 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-mint-400/25 hover:shadow-xl hover:shadow-mint-400/35 hover:-translate-y-0.5 transition-all">订阅更新</a>
-            <button class="md:hidden text-skin-secondary p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-mint-200/30 px-6 py-4 space-y-3 mobile-menu">
-            <a href="#manifesto" class="block text-skin-secondary font-medium py-1">开站宣言</a>
-            <a href="#recipes" class="block text-skin-secondary font-medium py-1">改良食谱</a>
-            <a href="#scenarios" class="block text-skin-secondary font-medium py-1">场景攻略</a>
-            <a href="#science" class="block text-skin-secondary font-medium py-1">科学依据</a>
-            <a href="#subscribe" class="block text-mint-600 font-semibold py-1">订阅更新</a>
-        </div>
-    </nav>
+   <!-- Navigation -->
+   <nav class="fixed top-0 w-full bg-cream/90 backdrop-blur-xl border-b border-mint-200/30 z-50">
+       <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+           <a href="#" class="flex items-center gap-2.5 text-xl font-bold text-mint-600 no-underline">
+               <div class="w-9 h-9 bg-gradient-to-br from-mint-300 to-mint-500 rounded-full flex items-center justify-center text-base shadow-md shadow-mint-300/30">🌿</div>
+               ClearSkinEats
+           </a>
+           <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-skin-secondary">
+               <li><a href="#manifesto" class="hover:text-mint-600 transition-colors relative group">开站宣言<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
+               <li><a href="#recipes" class="hover:text-mint-600 transition-colors relative group">改良食谱<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
+               <li><a href="#scenarios" class="hover:text-mint-600 transition-colors relative group">场景攻略<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
+               <li><a href="#science" class="hover:text-mint-600 transition-colors relative group">科学依据<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-mint-400 rounded-full transition-all group-hover:w-full"></span></a></li>
+           </ul>
+           <a href="#subscribe" class="hidden md:inline-flex bg-gradient-to-r from-mint-400 to-mint-500 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-mint-400/25 hover:shadow-xl hover:shadow-mint-400/35 hover:-translate-y-0.5 transition-all">订阅更新</a>
+           <button class="md:hidden text-skin-secondary p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+           </button>
+       </div>
+       <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-mint-200/30 px-6 py-4 space-y-3 mobile-menu">
+           <a href="#manifesto" class="block text-skin-secondary font-medium py-1">开站宣言</a>
+           <a href="#recipes" class="block text-skin-secondary font-medium py-1">改良食谱</a>
+           <a href="#scenarios" class="block text-skin-secondary font-medium py-1">场景攻略</a>
+           <a href="#science" class="block text-skin-secondary font-medium py-1">科学依据</a>
+           <a href="#subscribe" class="block text-mint-600 font-semibold py-1">订阅更新</a>
+       </div>
+   </nav>
 
-    <!-- Hero -->
-    <section class="pt-36 pb-16 px-6">
-        <div class="max-w-4xl mx-auto text-center fade-in">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint-100 text-mint-700 rounded-full text-sm font-semibold mb-8 border border-mint-200/50 tracking-wide">
-                <span class="w-2 h-2 bg-mint-500 rounded-full animate-pulse"></span>
-                基于证据的饮食策略实验室
-            </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold text-skin-text leading-tight mb-6 tracking-tight">
-                在战"痘"路上，<br>
-                <span class="hero-highlight text-mint-600">吃出你的力量</span>
-            </h1>
-            <p class="text-lg md:text-xl text-skin-secondary max-w-2xl mx-auto leading-relaxed mb-10">
-                不是教你"吃草"或"断食"，而是用科学方法改良你爱的中式味道，让美味与皮肤健康兼得。
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                <a href="#manifesto" class="px-8 py-4 bg-gradient-to-r from-mint-400 to-mint-500 text-white rounded-2xl font-semibold hover:shadow-xl hover:shadow-mint-400/30 hover:-translate-y-0.5 transition-all text-center">阅读开站宣言</a>
-                <a href="#recipes" class="px-8 py-4 bg-white text-mint-600 border-2 border-mint-300 rounded-2xl font-semibold hover:bg-mint-50 hover:border-mint-400 transition-all text-center">探索改良食谱</a>
-            </div>
-            <div class="flex justify-center gap-5 flex-wrap max-w-3xl mx-auto">
-                <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
-                    <span class="text-4xl mb-2 block">🥘</span>
-                    <p class="text-sm font-bold text-skin-text">改良食谱</p>
-                    <p class="text-xs text-skin-tertiary mt-1">红烧肉也能清爽吃</p>
-                </div>
-                <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
-                    <span class="text-4xl mb-2 block">📱</span>
-                    <p class="text-sm font-bold text-skin-text">场景攻略</p>
-                    <p class="text-xs text-skin-tertiary mt-1">外卖食堂全搞定</p>
-                </div>
-                <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
-                    <span class="text-4xl mb-2 block">🔬</span>
-                    <p class="text-sm font-bold text-skin-text">循证内容</p>
-                    <p class="text-xs text-skin-tertiary mt-1">每句话都有依据</p>
-                </div>
-                <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
-                    <span class="text-4xl mb-2 block">⚕️</span>
-                    <p class="text-sm font-bold text-skin-text">医疗优先</p>
-                    <p class="text-xs text-skin-tertiary mt-1">饮食只是辅助</p>
-                </div>
-            </div>
-        </div>
-    </section>
+   <!-- Hero -->
+   <section class="pt-36 pb-16 px-6">
+       <div class="max-w-4xl mx-auto text-center fade-in">
+           <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint-100 text-mint-700 rounded-full text-sm font-semibold mb-8 border border-mint-200/50 tracking-wide">
+               <span class="w-2 h-2 bg-mint-500 rounded-full animate-pulse"></span>
+               基于证据的饮食策略实验室
+           </div>
+           <h1 class="text-5xl md:text-6xl font-extrabold text-skin-text leading-tight mb-6 tracking-tight">
+               在战"痘"路上，<br>
+               <span class="hero-highlight text-mint-600">吃出你的力量</span>
+           </h1>
+           <p class="text-lg md:text-xl text-skin-secondary max-w-2xl mx-auto leading-relaxed mb-10">
+               不是教你"吃草"或"断食"，而是用科学方法改良你爱的中式味道，让美味与皮肤健康兼得。
+           </p>
+           <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+               <a href="#manifesto" class="px-8 py-4 bg-gradient-to-r from-mint-400 to-mint-500 text-white rounded-2xl font-semibold hover:shadow-xl hover:shadow-mint-400/30 hover:-translate-y-0.5 transition-all text-center">阅读开站宣言</a>
+               <a href="#recipes" class="px-8 py-4 bg-white text-mint-600 border-2 border-mint-300 rounded-2xl font-semibold hover:bg-mint-50 hover:border-mint-400 transition-all text-center">探索改良食谱</a>
+           </div>
+           <div class="flex justify-center gap-5 flex-wrap max-w-3xl mx-auto">
+               <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
+                   <span class="text-4xl mb-2 block">🥘</span>
+                   <p class="text-sm font-bold text-skin-text">改良食谱</p>
+                   <p class="text-xs text-skin-tertiary mt-1">红烧肉也能清爽吃</p>
+               </div>
+               <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
+                   <span class="text-4xl mb-2 block">📱</span>
+                   <p class="text-sm font-bold text-skin-text">场景攻略</p>
+                   <p class="text-xs text-skin-tertiary mt-1">外卖食堂全搞定</p>
+               </div>
+               <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
+                   <span class="text-4xl mb-2 block">🔬</span>
+                   <p class="text-sm font-bold text-skin-text">循证内容</p>
+                   <p class="text-xs text-skin-tertiary mt-1">每句话都有依据</p>
+               </div>
+               <div class="bg-white px-6 py-5 rounded-2xl shadow-sm shadow-mint-100 border border-mint-100/50 text-center min-w-[140px] hover:-translate-y-1 hover:shadow-md transition-all cursor-default">
+                   <span class="text-4xl mb-2 block">⚕️</span>
+                   <p class="text-sm font-bold text-skin-text">医疗优先</p>
+                   <p class="text-xs text-skin-tertiary mt-1">饮食只是辅助</p>
+               </div>
+           </div>
+       </div>
+   </section>
 
-    <!-- Disclaimer -->
-    <section class="px-6 pb-12">
-        <div class="max-w-5xl mx-auto">
-            <div class="bg-gradient-to-r from-warm-100 to-warm-200 border-l-4 border-accent-warm rounded-2xl p-6 md:p-8 flex items-start gap-4 fade-in">
-                <span class="text-2xl flex-shrink-0 mt-0.5">💛</span>
-                <div>
-                    <h3 class="font-bold text-amber-900 mb-2 text-base">先说一句重要的话</h3>
-                    <p class="text-amber-800/80 text-sm md:text-base leading-relaxed">
-                        ClearSkinEats 提供的所有饮食建议仅作为痤疮管理的<strong class="text-amber-900">辅助手段</strong>，不能替代专业医疗诊断和治疗。如果你正在经历严重的痤疮问题，请务必优先咨询皮肤科医生，遵医嘱进行规范治疗。饮食调整是辅助，医疗才是根本 —— 我们在这里，是为你提供温暖的"后勤支持"。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+   <!-- Disclaimer -->
+   <section class="px-6 pb-12">
+       <div class="max-w-5xl mx-auto">
+           <div class="bg-gradient-to-r from-warm-100 to-warm-200 border-l-4 border-accent-warm rounded-2xl p-6 md:p-8 flex items-start gap-4 fade-in">
+               <span class="text-2xl flex-shrink-0 mt-0.5">💛</span>
+               <div>
+                   <h3 class="font-bold text-amber-900 mb-2 text-base">先说一句重要的话</h3>
+                   <p class="text-amber-800/80 text-sm md:text-base leading-relaxed">
+                       ClearSkinEats 提供的所有饮食建议仅作为痤疮管理的<strong class="text-amber-900">辅助手段</strong>，不能替代专业医疗诊断和治疗。如果你正在经历严重的痤疮问题，请务必优先咨询皮肤科医生，遵医嘱进行规范治疗。饮食调整是辅助，医疗才是根本 —— 我们在这里，是为你提供温暖的"后勤支持"。
+                   </p>
+               </div>
+           </div>
+       </div>
+   </section>
 
-    <!-- Manifesto -->
-    <section id="manifesto" class="py-20 px-6 bg-gradient-to-b from-cream to-warm-50">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-14 fade-in">
-                <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">开站宣言</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">ClearSkinEats 的诞生</h2>
-                <p class="text-skin-secondary text-lg">一个关于觉醒、平衡与美味的故事</p>
-            </div>
+   <!-- Manifesto -->
+   <section id="manifesto" class="py-20 px-6 bg-gradient-to-b from-cream to-warm-50">
+       <div class="max-w-3xl mx-auto">
+           <div class="text-center mb-14 fade-in">
+               <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">开站宣言</span>
+               <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">ClearSkinEats 的诞生</h2>
+               <p class="text-skin-secondary text-lg">一个关于觉醒、平衡与美味的故事</p>
+           </div>
 
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm shadow-mint-100/50 border border-mint-100/40 fade-in" style="animation-delay:0.1s">
-                <!-- Chapter 1 -->
-                <div class="mb-10">
-                    <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
-                        <span class="manifesto-num">1</span>我的故事：从误区中觉醒
-                    </h3>
-                    <p class="text-skin-text leading-[2] mb-4 text-justify">
-                        我的整个青春期都被痤疮困扰。我曾像许多人一样，尝试各种护肤品，并盲目忌口所有"发物"，但皮肤问题依旧反复，像一场无休止的战斗。
-                    </p>
-                    <p class="text-skin-text leading-[2] text-justify">
-                        直到后来，我才惊觉核心问题之一竟藏在我的饮食习惯里：我吃了太多的甜食，却严重缺乏真正滋养身体的肉类和主食，导致了<strong class="text-mint-600">"营养不良"下的皮肤炎症</strong>。
-                    </p>
-                </div>
+           <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm shadow-mint-100/50 border border-mint-100/40 fade-in" style="animation-delay:0.1s">
+               <!-- Chapter 1 -->
+               <div class="mb-10">
+                   <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
+                       <span class="manifesto-num">1</span>我的故事：从误区中觉醒
+                   </h3>
+                   <p class="text-skin-text leading-[2] mb-4 text-justify">
+                       我的整个青春期都被痤疮困扰。我曾像许多人一样，尝试各种护肤品，并盲目忌口所有"发物"，但皮肤问题依旧反复，像一场无休止的战斗。
+                   </p>
+                   <p class="text-skin-text leading-[2] text-justify">
+                       直到后来，我才惊觉核心问题之一竟藏在我的饮食习惯里：我吃了太多的甜食，却严重缺乏真正滋养身体的肉类和主食，导致了<strong class="text-mint-600">"营养不良"下的皮肤炎症</strong>。
+                   </p>
+               </div>
 
-                <!-- Chapter 2 -->
-                <div class="mb-10">
-                    <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
-                        <span class="manifesto-num">2</span>我的核心发现：平衡，而非剥夺
-                    </h3>
-                    <p class="text-skin-text leading-[2] mb-4 text-justify">
-                        这个发现颠覆了我的认知。我意识到，战痘远非简单的"做减法"和盲目忌口。它关乎更智慧的<strong class="text-mint-600">"平衡"</strong>：
-                    </p>
-                    <ul class="ml-12 space-y-3 mb-6">
-                        <li class="text-skin-text leading-relaxed">减少那些真正促发炎症的<strong class="text-mint-600">"空能量"</strong>（如精制糖、不健康脂肪）</li>
-                        <li class="text-skin-text leading-relaxed">补足构建健康皮肤必需的<strong class="text-mint-600">"营养基石"</strong>（优质蛋白、复合碳水、锌、Omega-3）</li>
-                        <li class="text-skin-text leading-relaxed">拥抱那些被忽略的盟友，如多样的<strong class="text-mint-600">菌菇和豆类</strong></li>
-                    </ul>
-                    <div class="bg-gradient-to-r from-mint-50 to-mint-100 rounded-2xl p-6 border-l-4 border-mint-400">
-                        <p class="text-skin-text leading-[2] text-justify m-0">
-                            更重要的是，我是在<strong class="text-mint-600">坚持规范用药和科学清洁</strong>的基础上，通过饮食调整获得了事半功倍的效果。我坚信，皮肤健康需要<strong class="text-mint-600">医疗、护理与生活方式"三足鼎立"</strong>的支撑。
-                        </p>
-                    </div>
-                </div>
+               <!-- Chapter 2 -->
+               <div class="mb-10">
+                   <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
+                       <span class="manifesto-num">2</span>我的核心发现：平衡，而非剥夺
+                   </h3>
+                   <p class="text-skin-text leading-[2] mb-4 text-justify">
+                       这个发现颠覆了我的认知。我意识到，战痘远非简单的"做减法"和盲目忌口。它关乎更智慧的<strong class="text-mint-600">"平衡"</strong>：
+                   </p>
+                   <ul class="ml-12 space-y-3 mb-6">
+                       <li class="text-skin-text leading-relaxed">减少那些真正促发炎症的<strong class="text-mint-600">"空能量"</strong>（如精制糖、不健康脂肪）</li>
+                       <li class="text-skin-text leading-relaxed">补足构建健康皮肤必需的<strong class="text-mint-600">"营养基石"</strong>（优质蛋白、复合碳水、锌、Omega-3）</li>
+                       <li class="text-skin-text leading-relaxed">拥抱那些被忽略的盟友，如多样的<strong class="text-mint-600">菌菇和豆类</strong></li>
+                   </ul>
+                   <div class="bg-gradient-to-r from-mint-50 to-mint-100 rounded-2xl p-6 border-l-4 border-mint-400">
+                       <p class="text-skin-text leading-[2] text-justify m-0">
+                           更重要的是，我是在<strong class="text-mint-600">坚持规范用药和科学清洁</strong>的基础上，通过饮食调整获得了事半功倍的效果。我坚信，皮肤健康需要<strong class="text-mint-600">医疗、护理与生活方式"三足鼎立"</strong>的支撑。
+                       </p>
+                   </div>
+               </div>
 
-                <!-- Chapter 3 -->
-                <div class="mb-10">
-                    <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
-                        <span class="manifesto-num">3</span>我们的矛盾与出路：美味不必是负担
-                    </h3>
-                    <p class="text-skin-text leading-[2] text-justify">
-                        而我更深信，在<strong class="text-mint-600">"重口味"的享受与"皮肤友好"的健康之间，并非单选题</strong>。我们热爱的红烧肉、麻辣香锅，完全可以通过智慧的食材替换与烹饪改良，变得既满足口腹之欲，又不再成为皮肤的负担。
-                    </p>
-                </div>
+               <!-- Chapter 3 -->
+               <div class="mb-10">
+                   <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
+                       <span class="manifesto-num">3</span>我们的矛盾与出路：美味不必是负担
+                   </h3>
+                   <p class="text-skin-text leading-[2] text-justify">
+                       而我更深信，在<strong class="text-mint-600">"重口味"的享受与"皮肤友好"的健康之间，并非单选题</strong>。我们热爱的红烧肉、麻辣香锅，完全可以通过智慧的食材替换与烹饪改良，变得既满足口腹之欲，又不再成为皮肤的负担。
+                   </p>
+               </div>
 
-                <!-- Chapter 4 -->
-                <div class="mb-10">
-                    <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
-                        <span class="manifesto-num">4</span>这就是 ClearSkinEats 的使命
-                    </h3>
-                    <p class="text-skin-text leading-[2] mb-4 text-justify">
-                        因此，我创建了这个空间。这里<strong class="text-mint-600">不提供医疗建议</strong>，也<strong class="text-mint-600">绝非教你"吃草"或"断食"</strong>。
-                    </p>
-                    <p class="text-skin-text leading-[2] mb-4 text-justify">
-                        这里是一个<strong class="text-mint-600">"基于证据的饮食策略实验室"</strong>。我们将一起：
-                    </p>
-                    <ul class="ml-12 space-y-3">
-                        <li class="text-skin-text leading-relaxed"><strong class="text-mint-600">解构</strong>：用科学的眼光，厘清食物与皮肤之间的复杂联系</li>
-                        <li class="text-skin-text leading-relaxed"><strong class="text-mint-600">改造</strong>：为我们钟爱的中式菜肴，寻找更优的解决方案</li>
-                        <li class="text-skin-text leading-relaxed"><strong class="text-mint-600">平衡</strong>：找到让身心都满足、愉悦的饮食之道</li>
-                    </ul>
-                </div>
+               <!-- Chapter 4 -->
+               <div class="mb-10">
+                   <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
+                       <span class="manifesto-num">4</span>这就是 ClearSkinEats 的使命
+                   </h3>
+                   <p class="text-skin-text leading-[2] mb-4 text-justify">
+                       因此，我创建了这个空间。这里<strong class="text-mint-600">不提供医疗建议</strong>，也<strong class="text-mint-600">绝非教你"吃草"或"断食"</strong>。
+                   </p>
+                   <p class="text-skin-text leading-[2] mb-4 text-justify">
+                       这里是一个<strong class="text-mint-600">"基于证据的饮食策略实验室"</strong>。我们将一起：
+                   </p>
+                   <ul class="ml-12 space-y-3">
+                       <li class="text-skin-text leading-relaxed"><strong class="text-mint-600">解构</strong>：用科学的眼光，厘清食物与皮肤之间的复杂联系</li>
+                       <li class="text-skin-text leading-relaxed"><strong class="text-mint-600">改造</strong>：为我们钟爱的中式菜肴，寻找更优的解决方案</li>
+                       <li class="text-skin-text leading-relaxed"><strong class="text-mint-600">平衡</strong>：找到让身心都满足、愉悦的饮食之道</li>
+                   </ul>
+               </div>
 
-                <!-- Chapter 5 -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
-                        <span class="manifesto-num">5</span>最重要的原则：你是你自己健康的第一责任人
-                    </h3>
-                    <div class="bg-gradient-to-r from-mint-50 to-mint-100 rounded-2xl p-6 border-l-4 border-mint-400">
-                        <p class="text-skin-text leading-[2] text-justify m-0">
-                            我必须郑重声明：<strong class="text-mint-600">饮食是强大而温暖的辅助，但绝不能替代专业医疗。</strong>痤疮是疾病，诊治必须首先咨询皮肤科医生。在遵循医嘱的前提下，科学的饮食将成为你最坚实的"后勤支持"。
-                        </p>
-                    </div>
-                </div>
+               <!-- Chapter 5 -->
+               <div class="mb-8">
+                   <h3 class="text-xl font-bold text-mint-600 mb-5 flex items-center gap-3">
+                       <span class="manifesto-num">5</span>最重要的原则：你是你自己健康的第一责任人
+                   </h3>
+                   <div class="bg-gradient-to-r from-mint-50 to-mint-100 rounded-2xl p-6 border-l-4 border-mint-400">
+                       <p class="text-skin-text leading-[2] text-justify m-0">
+                           我必须郑重声明：<strong class="text-mint-600">饮食是强大而温暖的辅助，但绝不能替代专业医疗。</strong>痤疮是疾病，诊治必须首先咨询皮肤科医生。在遵循医嘱的前提下，科学的饮食将成为你最坚实的"后勤支持"。
+                       </p>
+                   </div>
+               </div>
 
-                <!-- Closing -->
-                <div class="text-center mt-12 pt-10 border-t border-mint-100">
-                    <p class="text-xl text-mint-600 font-bold italic leading-[2]">
-                        "我走过的路，我愿意与你分享。<br>
-                        让我们在遵循科学治疗的同时，学会用美食更好地滋养自己，<br>
-                        吃出健康，也吃出快乐。"
-                    </p>
-                    <p class="text-skin-tertiary mt-6 text-base">欢迎你，让我们一起踏上这段更聪明、更美味的旅程 🌿</p>
-                </div>
-            </div>
-        </div>
-    </section>
+               <!-- Closing -->
+               <div class="text-center mt-12 pt-10 border-t border-mint-100">
+                   <p class="text-xl text-mint-600 font-bold italic leading-[2]">
+                       "我走过的路，我愿意与你分享。<br>
+                       让我们在遵循科学治疗的同时，学会用美食更好地滋养自己，<br>
+                       吃出健康，也吃出快乐。"
+                   </p>
+                   <p class="text-skin-tertiary mt-6 text-base">欢迎你，让我们一起踏上这段更聪明、更美味的旅程 🌿</p>
+               </div>
+           </div>
+       </div>
+   </section>
 
-    <!-- Features -->
-    <section class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-14 fade-in">
-                <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">我们的特色</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">为什么选 ClearSkinEats？</h2>
-                <p class="text-skin-secondary text-lg max-w-xl mx-auto">不是让你吃草，而是让你爱吃的菜变得更健康</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-7">
-                <div class="bg-white p-10 rounded-3xl border border-mint-100/40 shadow-sm hover:shadow-xl hover:shadow-mint-100/40 hover:-translate-y-2 transition-all relative overflow-hidden group">
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mint-300 to-mint-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🌶️</div>
-                    <h3 class="text-xl font-bold text-skin-text mb-3">中式重口改良</h3>
-                    <p class="text-skin-secondary leading-relaxed">专注红烧肉、麻辣香锅、火锅等经典中餐的科学改良，保留风味的同时降低致痘风险，让你不用放弃家乡味。</p>
-                </div>
-                <div class="bg-white p-10 rounded-3xl border border-mint-100/40 shadow-sm hover:shadow-xl hover:shadow-mint-100/40 hover:-translate-y-2 transition-all relative overflow-hidden group">
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mint-300 to-mint-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">📱</div>
-                    <h3 class="text-xl font-bold text-skin-text mb-3">四大场景覆盖</h3>
-                    <p class="text-skin-secondary leading-relaxed">外卖怎么点？食堂怎么吃？聚餐怎么选？自炊怎么做？针对真实生活场景，提供可落地的操作指南。</p>
-                </div>
-                <div class="bg-white p-10 rounded-3xl border border-mint-100/40 shadow-sm hover:shadow-xl hover:shadow-mint-100/40 hover:-translate-y-2 transition-all relative overflow-hidden group">
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mint-300 to-mint-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🔬</div>
-                    <h3 class="text-xl font-bold text-skin-text mb-3">循证医学内容</h3>
-                    <p class="text-skin-secondary leading-relaxed">每篇内容都基于最新皮肤科和营养学研究，标注参考文献，拒绝伪科学和营销号谣言。</p>
-                </div>
-            </div>
-        </div>
-    </section>
+   <!-- Features -->
+   <section class="py-20 px-6">
+       <div class="max-w-6xl mx-auto">
+           <div class="text-center mb-14 fade-in">
+               <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">我们的特色</span>
+               <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">为什么选 ClearSkinEats？</h2>
+               <p class="text-skin-secondary text-lg max-w-xl mx-auto">不是让你吃草，而是让你爱吃的菜变得更健康</p>
+           </div>
+           <div class="grid md:grid-cols-3 gap-7">
+               <div class="bg-white p-10 rounded-3xl border border-mint-100/40 shadow-sm hover:shadow-xl hover:shadow-mint-100/40 hover:-translate-y-2 transition-all relative overflow-hidden group">
+                   <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mint-300 to-mint-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🌶️</div>
+                   <h3 class="text-xl font-bold text-skin-text mb-3">中式重口改良</h3>
+                   <p class="text-skin-secondary leading-relaxed">专注红烧肉、麻辣香锅、火锅等经典中餐的科学改良，保留风味的同时降低致痘风险，让你不用放弃家乡味。</p>
+               </div>
+               <div class="bg-white p-10 rounded-3xl border border-mint-100/40 shadow-sm hover:shadow-xl hover:shadow-mint-100/40 hover:-translate-y-2 transition-all relative overflow-hidden group">
+                   <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mint-300 to-mint-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">📱</div>
+                   <h3 class="text-xl font-bold text-skin-text mb-3">四大场景覆盖</h3>
+                   <p class="text-skin-secondary leading-relaxed">外卖怎么点？食堂怎么吃？聚餐怎么选？自炊怎么做？针对真实生活场景，提供可落地的操作指南。</p>
+               </div>
+               <div class="bg-white p-10 rounded-3xl border border-mint-100/40 shadow-sm hover:shadow-xl hover:shadow-mint-100/40 hover:-translate-y-2 transition-all relative overflow-hidden group">
+                   <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mint-300 to-mint-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">🔬</div>
+                   <h3 class="text-xl font-bold text-skin-text mb-3">循证医学内容</h3>
+                   <p class="text-skin-secondary leading-relaxed">每篇内容都基于最新皮肤科和营养学研究，标注参考文献，拒绝伪科学和营销号谣言。</p>
+               </div>
+           </div>
+       </div>
+   </section>
 
-    <!-- Recipes Section -->
-    <section id="recipes" class="py-20 px-6 bg-gradient-to-b from-cream to-mint-50/50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12 fade-in">
-                <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">招牌改良</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">热门改良食谱</h2>
-                <p class="text-skin-secondary text-lg max-w-xl mx-auto">从你最爱的菜开始，一步步改良。每道菜标注关键营养标签，科学有据。</p>
-            </div>
+   <!-- Recipes Section -->
+   <section id="recipes" class="py-20 px-6 bg-gradient-to-b from-cream to-mint-50/50">
+       <div class="max-w-6xl mx-auto">
+           <div class="text-center mb-12 fade-in">
+               <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">招牌改良</span>
+               <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">热门改良食谱</h2>
+               <p class="text-skin-secondary text-lg max-w-xl mx-auto">从你最爱的菜开始，一步步改良。每道菜标注关键营养标签，科学有据。</p>
+           </div>
 
-            <!-- Filter Tabs -->
-            <div class="flex justify-center gap-3 mb-12 flex-wrap fade-in">
-                <button onclick="filterRecipes('all')" class="filter-btn active px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="all">全部</button>
-                <button onclick="filterRecipes('breakfast')" class="filter-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="breakfast">早餐</button>
-                <button onclick="filterRecipes('lunch')" class="filter-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="lunch">午餐</button>
-                <button onclick="filterRecipes('dinner')" class="filter-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="dinner">晚餐</button>
-            </div>
+           <!-- Filter Tabs -->
+           <div class="flex justify-center gap-3 mb-12 flex-wrap fade-in">
+               <button onclick="filterRecipes('all')" class="filter-btn active px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="all">全部</button>
+               <button onclick="filterRecipes('breakfast')" class="filter-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="breakfast">早餐</button>
+               <button onclick="filterRecipes('lunch')" class="filter-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="lunch">午餐</button>
+               <button onclick="filterRecipes('dinner')" class="filter-btn px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-white text-skin-secondary border border-mint-200 hover:border-mint-400" data-filter="dinner">晚餐</button>
+           </div>
 
-            <!-- Recipe Grid -->
-            <div id="recipe-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Breakfast 1 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="breakfast">
-                    <div class="h-52 bg-gradient-to-br from-mint-100 to-mint-300 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,#5A9A8C_0%,transparent_50%)]"></div>
-                        <span class="text-6xl relative z-10">🥣</span>
-                    </div>
-                    <div class="p-7">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
-                            <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
-                            <span class="tag-glow px-3 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-xl border border-orange-100">高纤维</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-skin-text mb-2">燕麦奇亚籽碗</h3>
-                        <p class="text-skin-secondary text-sm leading-relaxed mb-4">钢切燕麦搭配奇亚籽、蓝莓与核桃碎。用无糖杏仁奶煮制，撒上肉桂粉平衡血糖。</p>
-                        <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
-                            <span>⏱ 15 分钟</span>
-                            <span>🔥 320 kcal</span>
-                        </div>
-                    </div>
-                </div>
+           <!-- Recipe Grid -->
+           <div id="recipe-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <!-- Breakfast 1 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="breakfast">
+                   <div class="h-52 bg-gradient-to-br from-mint-100 to-mint-300 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,#5A9A8C_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🥣</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
+                           <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
+                           <span class="tag-glow px-3 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-xl border border-orange-100">高纤维</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">燕麦奇亚籽碗</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">钢切燕麦搭配奇亚籽、蓝莓与核桃碎。用无糖杏仁奶煮制，撒上肉桂粉平衡血糖。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⏱ 15 分钟</span>
+                           <span>🔥 320 kcal</span>
+                       </div>
+                   </div>
+               </div>
 
-                <!-- Breakfast 2 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="breakfast">
-                    <div class="h-52 bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_70%_40%,#D4A574_0%,transparent_50%)]"></div>
-                        <span class="text-6xl relative z-10">🍳</span>
-                    </div>
-                    <div class="p-7">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">高蛋白</span>
-                            <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
-                            <span class="tag-glow px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-xl border border-purple-100">无麸质</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-skin-text mb-2">菠菜蘑菇烘蛋</h3>
-                        <p class="text-skin-secondary text-sm leading-relaxed mb-4">三个全蛋与菠菜、口蘑、番茄慢烘。富含锌与叶黄素，用橄榄油替代黄油。</p>
-                        <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
-                            <span>⏱ 20 分钟</span>
-                            <span>🔥 380 kcal</span>
-                        </div>
-                    </div>
-                </div>
+               <!-- Breakfast 2 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="breakfast">
+                   <div class="h-52 bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_70%_40%,#D4A574_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🍳</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">高蛋白</span>
+                           <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
+                           <span class="tag-glow px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-xl border border-purple-100">无麸质</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">菠菜蘑菇烘蛋</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">三个全蛋与菠菜、口蘑、番茄慢烘。富含锌与叶黄素，用橄榄油替代黄油。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⏱ 20 分钟</span>
+                           <span>🔥 380 kcal</span>
+                       </div>
+                   </div>
+               </div>
 
-                <!-- Lunch 1 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="lunch">
-                    <div class="h-52 bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,#ef4444_0%,transparent_50%)]"></div>
-                        <span class="text-6xl relative z-10">🥗</span>
-                    </div>
-                    <div class="p-7">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
-                            <span class="tag-glow px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-xl border border-teal-100">Omega-3</span>
-                            <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-skin-text mb-2">三文鱼藜麦波奇碗</h3>
-                        <p class="text-skin-secondary text-sm leading-relaxed mb-4">煎三文鱼配藜麦、牛油果、紫甘蓝与毛豆。淋柠檬汁与少量低钠酱油。</p>
-                        <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
-                            <span>⏱ 25 分钟</span>
-                            <span>🔥 520 kcal</span>
-                        </div>
-                    </div>
-                </div>
+               <!-- Lunch 1 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="lunch">
+                   <div class="h-52 bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,#ef4444_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🥗</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
+                           <span class="tag-glow px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-xl border border-teal-100">Omega-3</span>
+                           <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">三文鱼藜麦波奇碗</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">煎三文鱼配藜麦、牛油果、紫甘蓝与毛豆。淋柠檬汁与少量低钠酱油。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⏱ 25 分钟</span>
+                           <span>🔥 520 kcal</span>
+                       </div>
+                   </div>
+               </div>
 
-                <!-- Lunch 2: 清爽版红烧肉 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="lunch">
-                    <div class="h-52 bg-gradient-to-br from-rose-50 to-orange-50 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_40%_60%,#D4A574_0%,transparent_50%)]"></div>
-                        <span class="text-6xl relative z-10">🥘</span>
-                    </div>
-                    <div class="p-7">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
-                            <span class="tag-glow px-3 py-1 bg-rose-50 text-rose-700 text-xs font-bold rounded-xl border border-rose-100">减油40%</span>
-                            <span class="tag-glow px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-xl border border-amber-100">改良版</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-skin-text mb-2">清爽版红烧肉</h3>
-                        <p class="text-skin-secondary text-sm leading-relaxed mb-4">用代糖替代冰糖，先煎后炖改为先蒸后炖，保留软糯口感的同时大幅降低糖油负荷。</p>
-                        <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
-                            <span>⭐⭐ 中等难度</span>
-                            <span>🔥 450 kcal</span>
-                        </div>
-                    </div>
-                </div>
+               <!-- Lunch 2: 清爽版红烧肉 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="lunch">
+                   <div class="h-52 bg-gradient-to-br from-rose-50 to-orange-50 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_40%_60%,#D4A574_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🥘</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
+                           <span class="tag-glow px-3 py-1 bg-rose-50 text-rose-700 text-xs font-bold rounded-xl border border-rose-100">减油40%</span>
+                           <span class="tag-glow px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-xl border border-amber-100">改良版</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">清爽版红烧肉</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">用代糖替代冰糖，先煎后炖改为先蒸后炖，保留软糯口感的同时大幅降低糖油负荷。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⭐⭐ 中等难度</span>
+                           <span>🔥 450 kcal</span>
+                       </div>
+                   </div>
+               </div>
 
-                <!-- Dinner 1 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="dinner">
-                    <div class="h-52 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_60%_30%,#6366f1_0%,transparent_50%)]"></div>
-                        <span class="text-6xl relative z-10">🐟</span>
-                    </div>
-                    <div class="p-7">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tag-glow px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-xl border border-teal-100">Omega-3</span>
-                            <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
-                            <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-skin-text mb-2">清蒸鲭鱼配糙米饭</h3>
-                        <p class="text-skin-secondary text-sm leading-relaxed mb-4">富含 EPA 的鲭鱼清蒸保留营养，配糙米饭与烫西兰花。中式清淡做法，淋少许蒸鱼豉油。</p>
-                        <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
-                            <span>⏱ 20 分钟</span>
-                            <span>🔥 480 kcal</span>
-                        </div>
-                    </div>
-                </div>
+               <!-- Dinner 1 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="dinner">
+                   <div class="h-52 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_60%_30%,#6366f1_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🐟</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-xl border border-teal-100">Omega-3</span>
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低 GI</span>
+                           <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">清蒸鲭鱼配糙米饭</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">富含 EPA 的鲭鱼清蒸保留营养，配糙米饭与烫西兰花。中式清淡做法，淋少许蒸鱼豉油。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⏱ 20 分钟</span>
+                           <span>🔥 480 kcal</span>
+                       </div>
+                   </div>
+               </div>
 
-                <!-- Dinner 2: 低刺激麻辣香锅 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="dinner">
-                    <div class="h-52 bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_70%,#ef4444_0%,transparent_50%)]"></div>
-                        <span class="text-6xl relative z-10">🍲</span>
-                    </div>
-                    <div class="p-7">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">抗炎</span>
-                            <span class="tag-glow px-3 py-1 bg-rose-50 text-rose-700 text-xs font-bold rounded-xl border border-rose-100">减盐35%</span>
-                            <span class="tag-glow px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-xl border border-amber-100">改良版</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-skin-text mb-2">低刺激麻辣香锅</h3>
-                        <p class="text-skin-secondary text-sm leading-relaxed mb-4">用香料替代部分辣椒，增加姜黄和迷迭香等抗炎香料，减少辣椒素对皮肤的刺激。</p>
-                        <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
-                            <span>⭐⭐⭐ 较高难度</span>
-                            <span>🔥 520 kcal</span>
-                        </div>
-                    </div>
-                </div>
+               <!-- Dinner 2: 低刺激麻辣香锅 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="dinner">
+                   <div class="h-52 bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_70%,#ef4444_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🍲</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">抗炎</span>
+                           <span class="tag-glow px-3 py-1 bg-rose-50 text-rose-700 text-xs font-bold rounded-xl border border-rose-100">减盐35%</span>
+                           <span class="tag-glow px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded-xl border border-amber-100">改良版</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">低刺激麻辣香锅</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">用香料替代部分辣椒，增加姜黄和迷迭香等抗炎香料，减少辣椒素对皮肤的刺激。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⭐⭐⭐ 较高难度</span>
+                           <span>🔥 520 kcal</span>
+                       </div>
+                   </div>
+               </div>
 
-                <!-- Extra: 改良版奶茶 -->
-                <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="
+               <!-- Extra: 改良版奶茶 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="breakfast">
+                   <div class="h-52 bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,#D4A574_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🧋</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">低糖</span>
+                           <span class="tag-glow px-3 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-xl border border-orange-100">高纤维</span>
+                           <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">改良版奶茶</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">用燕麦奶+零卡糖+抹茶/乌龙茶底，自制一杯不升糖、不爆痘的"续命水"。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⭐ 简单</span>
+                           <span>🔥 180 kcal</span>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- Extra: 番茄豆腐蔬菜锅 -->
+               <div class="recipe-card group bg-white rounded-3xl overflow-hidden border border-mint-100/40 shadow-sm" data-category="dinner">
+                   <div class="h-52 bg-gradient-to-br from-rose-50 to-red-50 flex items-center justify-center relative overflow-hidden">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_70%,#f43f5e_0%,transparent_50%)]"></div>
+                       <span class="text-6xl relative z-10">🍜</span>
+                   </div>
+                   <div class="p-7">
+                       <div class="flex flex-wrap gap-2 mb-3">
+                           <span class="tag-glow px-3 py-1 bg-mint-50 text-mint-700 text-xs font-bold rounded-xl border border-mint-100">抗炎</span>
+                           <span class="tag-glow px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-xl border border-blue-100">无乳制品</span>
+                           <span class="tag-glow px-3 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-xl border border-orange-100">高纤维</span>
+                       </div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">番茄豆腐蔬菜锅</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed mb-4">番茄红素与大豆异黄酮协同抗氧化。使用嫩豆腐、番茄、香菇、白菜慢炖，无油清淡。</p>
+                       <div class="flex items-center justify-between text-xs text-skin-tertiary border-t border-mint-50 pt-4">
+                           <span>⏱ 25 分钟</span>
+                           <span>🔥 340 kcal</span>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Scenarios -->
+   <section id="scenarios" class="py-20 px-6">
+       <div class="max-w-6xl mx-auto">
+           <div class="text-center mb-14 fade-in">
+               <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">生活场景</span>
+               <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">四大场景攻略</h2>
+               <p class="text-skin-secondary text-lg max-w-xl mx-auto">不管你在哪吃，都有解决方案</p>
+           </div>
+           <div class="grid md:grid-cols-2 gap-6">
+               <div class="scenario-card bg-white p-8 rounded-3xl border border-mint-100/40 shadow-sm flex items-start gap-5">
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 shadow-sm">🛵</div>
+                   <div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">外卖攻略</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed">美团/饿了么点单技巧：如何看配料表、选商家、备注改良。附赠"痘痘肌外卖白名单"餐厅推荐。</p>
+                   </div>
+               </div>
+               <div class="scenario-card bg-white p-8 rounded-3xl border border-mint-100/40 shadow-sm flex items-start gap-5">
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 shadow-sm">🏫</div>
+                   <div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">食堂攻略</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed">高校/企业食堂选菜法则：窗口搭配技巧、避坑指南、一周健康食谱模板，让食堂也能吃出好皮肤。</p>
+                   </div>
+               </div>
+               <div class="scenario-card bg-white p-8 rounded-3xl border border-mint-100/40 shadow-sm flex items-start gap-5">
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 shadow-sm">🎉</div>
+                   <div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">聚餐攻略</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed">火锅、烧烤、日料、西餐...不同聚餐场景的"最小伤害"吃法，社交和护肤两不误。</p>
+                   </div>
+               </div>
+               <div class="scenario-card bg-white p-8 rounded-3xl border border-mint-100/40 shadow-sm flex items-start gap-5">
+                   <div class="w-14 h-14 bg-gradient-to-br from-mint-100 to-mint-200 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 shadow-sm">👨‍🍳</div>
+                   <div>
+                       <h3 class="text-lg font-bold text-skin-text mb-2">自炊攻略</h3>
+                       <p class="text-skin-secondary text-sm leading-relaxed">厨房小白也能上手的改良菜谱，从买菜到出锅全流程指导，附赠一周备餐计划。</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Science -->
+   <section id="science" class="py-20 px-6 bg-gradient-to-br from-mint-600 to-mint-800 text-white">
+       <div class="max-w-6xl mx-auto">
+           <div class="text-center mb-14 fade-in">
+               <span class="inline-block bg-white/15 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">科学依据</span>
+               <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">饮食与痤疮的科学关系</h2>
+               <p class="text-white/80 text-lg max-w-xl mx-auto">我们说的每一句话，都有研究支撑</p>
+           </div>
+           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+               <div class="science-card bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                   <span class="text-5xl mb-5 block">🍬</span>
+                   <h4 class="text-lg font-bold mb-3">高 GI 食物</h4>
+                   <p class="text-white/75 text-sm leading-relaxed">高升糖指数食物会快速升高血糖，刺激胰岛素和 IGF-1 分泌，促进皮脂分泌和炎症反应。</p>
+               </div>
+               <div class="science-card bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                   <span class="text-5xl mb-5 block">🥛</span>
+                   <h4 class="text-lg font-bold mb-3">乳制品</h4>
+                   <p class="text-white/75 text-sm leading-relaxed">牛奶中的激素和生长因子可能刺激皮脂腺，尤其是脱脂奶与痤疮的关联已被多项研究证实。</p>
+               </div>
+               <div class="science-card bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                   <span class="text-5xl mb-5 block">🌶️</span>
+                   <h4 class="text-lg font-bold mb-3">辛辣刺激</h4>
+                   <p class="text-white/75 text-sm leading-relaxed">辣椒素虽不直接致痘，但可能通过促进炎症因子释放和血管扩张加重已有痘痘的红肿。</p>
+               </div>
+               <div class="science-card bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/10">
+                   <span class="text-5xl mb-5 block">🥜</span>
+                   <h4 class="text-lg font-bold mb-3">Omega-6 脂肪酸</h4>
+                   <p class="text-white/75 text-sm leading-relaxed">过量的 Omega-6（如大豆油、玉米油）会促进炎症，而 Omega-3（深海鱼、亚麻籽）则有抗炎作用。</p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Tag Guide -->
+   <section id="tags" class="py-20 px-6 bg-white">
+       <div class="max-w-4xl mx-auto">
+           <div class="text-center mb-12 fade-in">
+               <span class="inline-block bg-mint-100 text-mint-700 px-5 py-2 rounded-full text-sm font-semibold mb-4 border border-mint-200/50">标签指南</span>
+               <h2 class="text-3xl md:text-4xl font-extrabold text-skin-text mb-4 tracking-tight">快速看懂营养标签</h2>
+               <p class="text-skin-secondary text-lg">每个标签背后的循证营养学意义</p>
+           </div>
+           <div class="space-y-4 fade-in">
+               <div class="flex items-start gap-4 p-6 rounded-2xl bg-mint-50/60 border border-mint-100/50 hover:bg-mint-50 transition-colors">
+                   <span class="px-3 py-1.5 bg-mint-100 text-mint-700 text-sm font-bold rounded-xl border border-mint-200 flex-shrink-0">低 GI</span>
+                   <p class="text-skin-secondary text-sm leading-relaxed">升糖指数低于 55，避免血糖剧烈波动，减少胰岛素驱动的皮脂分泌与角质过度增生。</p>
+               </div>
+               <div class="flex items-start gap-4 p-6 rounded-2xl bg-mint-50/60 border border-mint-100/50 hover:bg-mint-50 transition-colors">
+                   <span class="px-3 py-1.5 bg-blue-50 text-blue-700 text-sm font-bold rounded-xl border border-blue-200 flex-shrink-0">无乳制品</span>
+                   <p class="text-skin-secondary text-sm leading-relaxed">排除牛奶、奶酪等。乳清蛋白与 IGF-1 可能刺激痤疮，可用燕麦奶、杏仁奶替代。</p>
+               </div>
+               <div class="flex items-start gap-4 p-6 rounded-2xl bg-mint-50/60 border border-mint-100/50 hover:bg-mint-50 transition-colors">
+                   <span class="px-3 py-1.5 bg-teal-50 text-teal-700 text-sm font-bold rounded-xl border border-teal-200 flex-shrink-0">Omega-3</span>
+                   <p class="text-skin-secondary text-sm leading-relaxed">富含 EPA/DHA，竞争性抑制促炎介质花生四烯酸，降低皮肤红肿反应。</p>
+               </div>
+               <div class="flex items-start gap-4 p-6 rounded-2xl bg-mint-50/60 border border-mint-100/50 hover:bg-mint-50 transition-colors">
+                   <span class="px-3 py-1.5 bg-mint-100 text-mint-700 text-sm font-bold rounded-xl border border-mint-200 flex-shrink-0">抗炎</span>
+                   <p class="text-skin-secondary text-sm leading-relaxed">含有姜黄素、多酚或硫化物等活性成分，直接抑制 NF-κB 等炎症通路。</p>
+               </div>
+               <div class="flex items-start gap-4 p-6 rounded-2xl bg-mint-50/60 border border-mint-100/50 hover:bg-mint-50 transition-colors">
+                   <span class="px-3 py-1.5 bg-purple-50 text-purple-700 text-sm font-bold rounded-xl border border-purple-200 flex-shrink-0">无麸质</span>
+                   <p class="text-skin-secondary text-sm leading-relaxed">排除小麦制品。部分痤疮人群对麸质敏感，可能诱发肠道炎症间接影响皮肤。</p>
+               </div>
+               <div class="flex items-start gap-4 p-6 rounded-2xl bg-mint-50/60 border border-mint-100/50 hover:bg-mint-50 transition-colors">
+                   <span class="px-3 py-1.5 bg-orange-50 text-orange-700 text-sm font-bold rounded-xl border border-orange-200 flex-shrink-0">高纤维</span>
+                   <p class="text-skin-secondary text-sm leading-relaxed">膳食纤维延缓糖分吸收，滋养肠道益生菌，改善肠-皮肤轴功能。</p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- CTA / Subscribe -->
+   <section id="subscribe" class="py-24 px-6">
+       <div class="max-w-3xl mx-auto">
+           <div class="bg-gradient-to-br from-mint-400 to-mint-600 rounded-[2rem] p-10 md:p-16 text-white text-center relative overflow-hidden shadow-xl shadow-mint-400/20 fade-in">
+               <div class="absolute -top-20 -right-20 w-80 h-80 bg-white/5 rounded-full"></div>
+               <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-white/5 rounded-full"></div>
+               <h2 class="text-3xl md:text-4xl font-extrabold mb-4 relative z-10">加入 ClearSkinEats 社群</h2>
+               <p class="text-white/90 text-lg mb-8 max-w-md mx-auto relative z-10">每周获取新的改良食谱和护肤饮食资讯，和志同道合的小伙伴一起吃出好皮肤。</p>
+               <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative z-10" onsubmit="event.preventDefault(); alert('感谢订阅！我们会尽快与你联系。');">
+                   <input type="email" placeholder="输入你的邮箱地址" required class="flex-1 px-6 py-4 rounded-full bg-white/95 text-skin-text placeholder-skin-tertiary outline-none focus:ring-2 focus:ring-white/50 text-sm">
+                   <button type="submit" class="px-8 py-4 bg-accent-warm text-skin-text rounded-full font-bold text-sm hover:bg-accent-dark hover:-translate-y-0.5 transition-all shadow-lg whitespace-nowrap">免费订阅</button>
+               </form>
+               <p class="text-white/60 text-xs mt-5 relative z-10">🔒 我们尊重你的隐私，不会发送垃圾邮件</p>
+           </div>
+       </div>
+   </section>
+
+   <!-- Footer -->
+   <footer class="bg-gradient-to-b from-mint-800 to-mint-900 text-white py-16 px-6">
+       <div class="max-w-6xl mx-auto">
+           <div class="grid md:grid-cols-4 gap-10 mb-12">
+               <div class="md:col-span-1">
+                   <a href="#" class="flex items-center gap-2.5 text-xl font-bold text-white mb-4 no-underline">
+                       <div class="w-9 h-9 bg-gradient-to-br from-mint-300 to-mint-500 rounded-full flex items-center justify-center text-base">🌿</div>
+                       ClearSkinEats
+                   </a>
+                   <p class="text-white/50 text-sm leading-relaxed">通过科学的饮食改良方案，帮助中国年轻人改善皮肤健康。饮食是辅助，医疗是根本。</p>
+               </div>
+               <div>
+                   <h4 class="text-xs font-bold uppercase tracking-widest text-white/80 mb-5">内容</h4>
+                   <ul class="space-y-3">
+                       <li><a href="#recipes" class="text-white/50 hover:text-white text-sm transition-colors no-underline">改良食谱</a></li>
+                       <li><a href="#scenarios" class="text-white/50 hover:text-white text-sm transition-colors no-underline">场景攻略</a></li>
+                       <li><a href="#science" class="text-white/50 hover:text-white text-sm transition-colors no-underline">科学知识</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">成功案例</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-xs font-bold uppercase tracking-widest text-white/80 mb-5">关于</h4>
+                   <ul class="space-y-3">
+                       <li><a href="#manifesto" class="text-white/50 hover:text-white text-sm transition-colors no-underline">我们的故事</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">医学顾问团队</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">内容标准</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">联系我们</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-xs font-bold uppercase tracking-widest text-white/80 mb-5">合作</h4>
+                   <ul class="space-y-3">
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">企业食堂</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">高校合作</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">品牌联名</a></li>
+                       <li><a href="#" class="text-white/50 hover:text-white text-sm transition-colors no-underline">媒体采访</a></li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">
+               <span>© 2026 ClearSkinEats. All rights reserved.</span>
+               <span>本站内容仅供参考，不构成医疗建议。严重痤疮请及时就医。</span>
+           </div>
+       </div>
+   </footer>
+
+   <script>
+       function filterRecipes(category) {
+           const cards = document.querySelectorAll('.recipe-card');
+           const buttons = document.querySelectorAll('.filter-btn');
+           buttons.forEach(btn => {
+               if (btn.dataset.filter === category) {
+                   btn.classList.add('active');
+                   btn.classList.remove('bg-white', 'text-skin-secondary', 'border-mint-200');
+               } else {
+                   btn.classList.remove('active');
+                   btn.classList.add('bg-white', 'text-skin-secondary', 'border-mint-200');
+               }
+           });
+           cards.forEach((card, index) => {
+               if (category === 'all' || card.dataset.category === category) {
+                   card.style.display = '';
+                   setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, index * 60);
+               } else {
+                   card.style.opacity = '0'; card.style.transform = 'translateY(12px)';
+                   setTimeout(() => { card.style.display = 'none'; }, 350);
+               }
+           });
+       }
+       const observer = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.style.animationPlayState = 'running';
+                   observer.unobserve(entry.target);
+               }
+           });
+       }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+       document.querySelectorAll('.fade-in').forEach(el => {
+           el.style.animationPlayState = 'paused';
+           observer.observe(el);
+       });
+       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+           anchor.addEventListener('click', function (e) {
+               e.preventDefault();
+               const target = document.querySelector(this.getAttribute('href'));
+               if (target) {
+                   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                   document.getElementById('mobile-menu').classList.add('hidden');
+               }
+           });
+       });
+   </script>
+</body>
+</html>
